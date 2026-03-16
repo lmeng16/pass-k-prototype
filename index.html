@@ -1183,7 +1183,7 @@
       .badge-running { background: #EFF6FF; color: #2563EB; }
       .badge-completed { background: var(--success-bg); color: var(--success-text); }
       .badge-failed { background: rgba(239,68,68,0.08); color: #DC2626; }
-      .badge-scheduled { background: #FFF7ED; color: #C2410C; }
+      .badge-scheduled { background: var(--neutral-badge-bg); color: var(--secondary); }
       .badge-canceled { background: var(--neutral-badge-bg); color: var(--secondary); }
       .badge-status {
         display: inline-flex; align-items: center; gap: 5px;
@@ -1303,29 +1303,20 @@
     
       /* Error Banner */
       .error-banner {
-        display: flex; align-items: flex-start; gap: 12px;
-        padding: 16px 20px; border-radius: 8px;
-        background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2);
+        display: flex; align-items: center; gap: 4px;
+        padding: 8px 12px; border-radius: 6px;
+        background: #FFE2D7; border: none;
         margin-bottom: 16px;
       }
       .error-banner .error-icon {
-        width: 32px; height: 32px; border-radius: 50%;
-        background: rgba(239,68,68,0.12); color: #DC2626;
+        color: #FF5C00;
         display: flex; align-items: center; justify-content: center;
         font-size: 14px; flex-shrink: 0;
       }
-      .error-banner .error-content { flex: 1; }
-      .error-banner .error-title { font-size: 14px; font-weight: 600; color: #DC2626; margin-bottom: 2px; }
-      .error-banner .error-msg { font-size: 12px; color: var(--secondary); }
-      .error-banner .error-time { font-size: 11px; color: var(--tertiary); margin-top: 4px; }
-    
-      .partial-banner {
-        display: flex; align-items: center; gap: 8px;
-        padding: 10px 16px; border-radius: 6px;
-        background: #FFFBEB; border: 1px solid #FDE68A;
-        font-size: 12px; color: #92400E;
-        margin-bottom: 16px;
-      }
+      .error-banner .error-content { flex: 1; padding: 2px 8px; font-size: 14px; color: #5C271F; }
+      .error-banner .error-title { font-weight: 600; display: inline; }
+      .error-banner .error-msg { display: inline; }
+      .error-banner .error-time { display: none; }
     
       /* Results Table */
       .results-table { width: 100%; border-collapse: collapse; }
@@ -1823,6 +1814,7 @@
       .wiz-mc-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:12px; }
       .wiz-mc-field label { display:block; font-size:14px; font-weight:500; color:var(--primary); margin-bottom:4px; }
       .wiz-mc-field select, .wiz-mc-field input { width:100%; height:34px; padding:0 8px; border:1px solid var(--border-input); border-radius:6px; font-size:14px; font-family:Inter,sans-serif; background:var(--white); color:var(--primary); outline:none; }
+      .wiz-mc-field select:disabled { background:var(--bg); color:var(--tertiary); cursor:not-allowed; }
       .wiz-mc-field select.placeholder { color:var(--tertiary); }
       .wiz-mc-field select option { color:var(--primary); }
       .wiz-mc-field select option[value=""] { color:var(--tertiary); }
@@ -1940,12 +1932,12 @@
       .rl-cards { display:flex; flex-direction:column; gap:12px; }
     
       .rl-card { background:var(--white); border:1px solid var(--border); border-radius:6px; padding:14px 16px 12px; transition:border-color 0.2s; }
-      .rl-card.error { border-color:rgba(220,38,38,0.35); }
+      .rl-card.error { border-color:var(--border); }
       .rl-card-top { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
       .rl-card-icon { width:20px; height:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-      .rl-card-icon.spinning { color:var(--accent); animation:rl-spin 1s linear infinite; }
+      .rl-card-icon.spinning { color:var(--tertiary); animation:rl-spin 1s linear infinite; }
       .rl-card-icon.check { color:var(--success-text); }
-      .rl-card-icon.fail { color:#DC2626; }
+      .rl-card-icon.fail { color:var(--tertiary); }
       @keyframes rl-spin { to { transform:rotate(360deg); } }
       .rl-card-name { font-size:13px; font-weight:600; color:var(--primary); }
       .rl-card-k { font-size:13px; color:var(--tertiary); }
@@ -1957,7 +1949,7 @@
       .rl-bar-track { height:6px; border-radius:9999px; background:rgba(0,54,175,0.07); overflow:hidden; }
       .rl-bar-fill { height:100%; border-radius:9999px; background:var(--accent); transition:width 0.4s ease; }
       .rl-bar-fill.done { background:var(--success-icon); }
-      .rl-bar-fill.fail { background:#DC2626; }
+      .rl-bar-fill.fail { background:var(--tertiary); }
     
       .rl-card-bottom { display:flex; align-items:center; justify-content:space-between; }
       .rl-card-time { font-size:11px; color:var(--tertiary); display:flex; align-items:center; gap:6px; }
@@ -1971,7 +1963,8 @@
       .rl-btn-retry { background:none; border:1px solid rgba(7,1,255,0.29); color:var(--accent); }
       .rl-btn-retry:hover { background:var(--accent-badge-bg); }
     
-      .rl-card-error { font-size:11px; color:#DC2626; margin-top:6px; padding:6px 8px; background:rgba(220,38,38,0.04); border-radius:4px; display:flex; align-items:center; gap:6px; }
+      .rl-card-error { font-size:12px; color:var(--secondary); margin-top:6px; padding:6px 10px; background:var(--bg); border:1px solid var(--border); border-radius:5px; display:flex; align-items:center; gap:6px; }
+      .rl-card-error i { color:var(--tertiary); font-size:11px; }
     
       .rl-previous { margin-top:4px; }
       .rl-previous summary { font-size:11px; color:var(--tertiary); cursor:pointer; list-style:none; display:flex; align-items:center; gap:4px; }
@@ -1980,10 +1973,10 @@
       .rl-previous[open] summary i { transform:rotate(90deg); }
       .rl-previous-list { padding:6px 0 0 24px; font-size:11px; color:var(--tertiary); }
     
-      .rl-error-banner { background:rgba(220,38,38,0.04); border:1px solid rgba(220,38,38,0.2); border-radius:6px; padding:12px 16px; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
-      .rl-error-banner i { color:#DC2626; font-size:14px; flex-shrink:0; }
-      .rl-error-banner-text { font-size:12px; color:var(--primary); flex:1; }
-      .rl-error-banner-text strong { color:#DC2626; }
+      .rl-error-banner { background:#FFE2D7; border:none; border-radius:6px; padding:8px 12px; margin-bottom:12px; display:flex; align-items:center; gap:4px; }
+      .rl-error-banner i { color:#FF5C00; font-size:14px; flex-shrink:0; }
+      .rl-error-banner-text { font-size:14px; color:#5C271F; flex:1; padding:2px 8px; }
+      .rl-error-banner-text strong { color:#5C271F; }
     
       /* ═══ Compact stats bar ═══ */
       .compact-stats { display:flex; align-items:center; gap:0; padding:10px 16px; background:var(--white); border:1px solid var(--border); border-radius:8px; margin-bottom:12px; }
@@ -2028,11 +2021,10 @@
       .rh-config-row { display:flex; justify-content:space-between; padding:3px 0; }
       .rh-config-label { font-weight:600; color:var(--primary); }
     
-      .rh-attempts { margin-top:8px; padding-left:20px; border-left:2px solid var(--border); }
-      .rh-attempt { padding:6px 0; font-size:11px; color:var(--tertiary); display:flex; align-items:center; gap:8px; }
-      .rh-attempt-badge { font-size:10px; font-weight:600; padding:1px 5px; border-radius:3px; }
-      .rh-attempt-badge.fail { background:rgba(220,38,38,0.08); color:#DC2626; }
-      .rh-attempt-badge.ok { background:var(--success-bg); color:var(--success-text); }
+      .rh-model-results { margin-top:8px; display:flex; flex-direction:column; gap:4px; }
+      .rh-model-row { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--secondary); }
+      .rh-model-name { font-weight:600; color:var(--primary); }
+      .rh-model-detail { color:var(--tertiary); }
     </style>
     </head>
     <body>
@@ -2113,7 +2105,10 @@
         <div class="content page active" id="page-landing">
           <div class="title-row">
             <h2 class="h5">Pass@K runs</h2>
-            <button class="btn-solid-accent" onclick="showPage('setup')"><i class="fa-solid fa-plus"></i> Create new run</button>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button class="btn-outline-accent" onclick="simulateDemoRun()" title="Simulate a run where 2/3 models pass and 1 fails"><i class="fa-solid fa-play"></i> Simulate 2-pass / 1-fail</button>
+              <button class="btn-solid-accent" onclick="showPage('setup')"><i class="fa-solid fa-plus"></i> Create new run</button>
+            </div>
           </div>
     
           <div class="table-container">
@@ -2429,11 +2424,11 @@
           <div class="wiz-mc-row">
             <div class="wiz-mc-field">
               <label>Provider</label>
-              <select class="placeholder" onchange="wizSelectChanged(this)"><option value="" selected="">Select provider</option><option value="LiteLLM">LiteLLM</option><option value="OpenAI">OpenAI</option><option value="Anthropic">Anthropic</option><option value="Google">Google</option></select>
+              <select class="placeholder" onchange="onProviderChange(this,'solver')"><option value="" selected="">Select provider</option><option value="OpenAI">OpenAI</option><option value="Anthropic">Anthropic</option><option value="Google">Google</option><option value="Meta">Meta</option><option value="Mistral">Mistral</option><option value="DeepSeek">DeepSeek</option></select>
             </div>
             <div class="wiz-mc-field">
               <label>Model</label>
-              <select class="placeholder" onchange="wizSelectChanged(this)"><option value="" selected="">Select model</option><option value="gpt-4o">gpt-4o</option><option value="claude-3.5-sonnet">claude-3.5-sonnet</option><option value="gemini-pro">gemini-pro</option><option value="o3-mini">o3-mini</option><option value="llama-4">llama-4</option></select>
+              <select class="placeholder" disabled onchange="wizSelectChanged(this)"><option value="" selected="">Select model</option></select>
             </div>
           </div>
           <button class="wiz-mc-adv-toggle " onclick="toggleWizAdv(this,0)">
@@ -2457,7 +2452,7 @@
       </div>
                   <button class="wiz-btn-add" onclick="openEndpointModal('solver')"><i class="fa-solid fa-plus"></i> Add endpoint</button>
                   <div class="wiz-form-group" style="margin-top:24px">
-                    <label class="wiz-label">Solver prompt</label>
+                    <label class="wiz-label">Solver model prompt</label>
                     <textarea class="wiz-textarea" id="wizSolverPrompt" rows="14">You are an expert evaluator. Given a user prompt, a generated response, and a list of quality rubrics, please evaluate the response against EACH rubric.
     
     For each rubric, mark "PASS" if the criterion is satisfied, or "FAIL" if it is not.
@@ -2505,11 +2500,11 @@
           <div class="wiz-mc-row">
             <div class="wiz-mc-field">
               <label>Provider</label>
-              <select class="" onchange="wizSelectChanged(this)"><option value="">Select provider</option><option value="LiteLLM">LiteLLM</option><option value="OpenAI" selected="">OpenAI</option><option value="Anthropic">Anthropic</option><option value="Google">Google</option></select>
+              <select class="" onchange="onProviderChange(this,'judge')"><option value="">Select provider</option><option value="OpenAI" selected="">OpenAI</option><option value="Anthropic">Anthropic</option><option value="Google">Google</option><option value="Meta">Meta</option><option value="Mistral">Mistral</option><option value="DeepSeek">DeepSeek</option></select>
             </div>
             <div class="wiz-mc-field">
               <label>Model</label>
-              <select class="" onchange="wizSelectChanged(this)"><option value="">Select model</option><option value="gpt-4o">gpt-4o</option><option value="claude-3.5-sonnet">claude-3.5-sonnet</option><option value="gemini-pro">gemini-pro</option><option value="o3-mini" selected="">o3-mini</option><option value="llama-4">llama-4</option></select>
+              <select class="" onchange="wizSelectChanged(this)"><option value="">Select model</option><option value="gpt-4o">gpt-4o</option><option value="gpt-4o-mini">gpt-4o-mini</option><option value="gpt-4-turbo">gpt-4-turbo</option><option value="o3">o3</option><option value="o3-mini" selected="">o3-mini</option><option value="o4-mini">o4-mini</option></select>
             </div>
           </div>
           <button class="wiz-mc-adv-toggle" onclick="toggleWizAdv(this,-1)">
@@ -2759,16 +2754,13 @@
             </div>
           </div>
     
-          <!-- State selector (prototype control) -->
-          <div class="version-switcher" style="margin-bottom:16px">
-            <label><i class="fa-solid fa-eye" style="margin-right:4px"></i> Preview state</label>
-            <select id="stateSelect" onchange="setRunState(this.value)">
-              <option value="running">Running (in progress)</option>
-              <option value="completed">Completed (success)</option>
-              <option value="failed">Failed (with partial results)</option>
-              <option value="scheduled">Scheduled (recurring)</option>
-            </select>
-          </div>
+          <select id="stateSelect" style="display:none">
+            <option value="running">Running</option>
+            <option value="completed">Completed</option>
+            <option value="failed">Failed</option>
+            <option value="canceled">Canceled</option>
+            <option value="scheduled">Scheduled</option>
+          </select>
     
           <div class="detail-tabs" id="detailTabs">
             <div class="detail-tab active" onclick="switchDetailTab('dp-results', this)">Results</div>
@@ -2782,8 +2774,8 @@
               <div class="retry-banner-rows" id="retryBannerRows"></div>
             </div>
     
-            <!-- Compact stats bar -->
-            <div class="compact-stats" id="compactStats">
+            <!-- Compact stats bar (hidden) -->
+            <div class="compact-stats" id="compactStats" style="display:none">
               <div class="cs-item"><span class="cs-label">Tasks</span><span class="cs-value" id="statTasks">5,000</span><span class="cs-sub" id="statTasksSub">model-tasks</span></div>
               <div class="cs-sep"></div>
               <div class="cs-item"><span class="cs-label">Pass@10</span><span class="cs-value cs-accent" id="statPassRate">49.4%</span><span class="cs-sub" id="statPassSub">mandatory</span></div>
@@ -2797,27 +2789,19 @@
             <div class="error-banner" id="errorBanner" style="display:none">
               <div class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
               <div class="error-content">
-                <div class="error-title" id="errorTitle">1 of 3 models failed</div>
-                <div class="error-msg" id="errorMsg">Some models did not complete. You can retry the failed models.</div>
-                <div class="error-time" id="errorTime"></div>
+                <span class="error-title" id="errorTitle"></span> <span class="error-msg" id="errorMsg"></span>
               </div>
-              <button class="btn-outline-accent" style="flex-shrink:0" onclick="retryFailedModels()"><i class="fa-solid fa-rotate-right"></i> Retry failed models</button>
-            </div>
-    
-            <!-- Partial results warning (hidden) -->
-            <div class="partial-banner" id="partialBanner" style="display:none">
-              <i class="fa-solid fa-triangle-exclamation"></i>
-              <span><strong>Partial results:</strong> Results below reflect only the completed models.</span>
+              <button class="btn-outline-accent" id="retryFailedBtn" style="flex-shrink:0" onclick="retryFailedModels()"><i class="fa-solid fa-rotate-right"></i> <span id="retryFailedLabel">Retry failed models</span></button>
             </div>
     
             <div id="res-original">
               <div class="res-section">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-                  <div class="res-section-title" style="margin-bottom:0">Model Performance Summary</div>
+                  <div class="res-section-title" style="margin-bottom:0">Model Performance</div>
                   <div style="display:flex;align-items:center;gap:4px">
-                    <button class="mps-tab" onclick="switchMPS(0,this)">Table</button>
                     <button class="mps-tab active" onclick="switchMPS(2,this)">Visual</button>
                     <button class="mps-tab" onclick="switchMPS(3,this)">Cards</button>
+                    <button class="mps-tab" onclick="switchMPS(0,this)">Table</button>
                   </div>
                 </div>
                 <div id="mpsContainer"><div class="mps-visual"><div class="mps-vis-row">
@@ -3050,67 +3034,43 @@
             <div class="rh-timeline" id="rhTimeline"><div class="rh-entry current" onclick="loadHistoryRun(0)">
           <div class="rh-entry-top">
             <span class="rh-entry-time">Mar 3, 2026 9:00 AM (PST)</span>
-            <span class="rh-entry-trigger">Scheduled</span>
             <span class="rh-entry-badge"><span class="badge-status badge-completed"><i class="fa-solid fa-check" style="font-size:9px"></i> Completed</span></span>
           </div>
           <div class="rh-entry-stats">
             <span><i class="fa-solid fa-list-check"></i> 1,000 tasks</span>
-            <span><i class="fa-solid fa-chart-simple"></i> 49.4%</span>
+            <span><i class="fa-solid fa-gavel"></i> Judge: GPT-5.2</span>
             <span><i class="fa-solid fa-stopwatch"></i> 6m 42s</span>
-            <span><i class="fa-solid fa-microchip"></i> GPT-5.2, Gemini 3, Claude Opus, Llama 4, Mistral Large</span>
-          </div>
-          
-          
-          <button class="rh-config-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('i').style.transform=this.nextElementSibling.classList.contains('open')?'rotate(90deg)':''">
-            <i class="fa-solid fa-chevron-right"></i> Configuration
-          </button>
-          <div class="rh-config-body">
-            <div class="rh-config-row"><span class="rh-config-label">GPT-5.2</span><span>https://api.example.com/v1/chat</span></div><div class="rh-config-row"><span class="rh-config-label">Gemini 3</span><span>https://api.example.com/v1/chat</span></div><div class="rh-config-row"><span class="rh-config-label">Claude Opus</span><span>https://api.example.com/v1/chat</span></div><div class="rh-config-row"><span class="rh-config-label">Llama 4</span><span>https://api.example.com/v1/chat</span></div><div class="rh-config-row"><span class="rh-config-label">Mistral Large</span><span>https://api.example.com/v1/chat</span></div>
-            <div class="rh-config-row"><span class="rh-config-label">Judge: GPT-5.2</span><span>https://api.example.com/v1/chat</span></div>
-            <div class="rh-config-row"><span class="rh-config-label">Tasks</span><span>1000 tasks</span></div>
           </div>
         </div><div class="rh-entry" onclick="loadHistoryRun(1)">
           <div class="rh-entry-top">
             <span class="rh-entry-time">Feb 24, 2026 9:00 AM</span>
-            <span class="rh-entry-trigger">Scheduled</span>
             <span class="rh-entry-badge"><span class="badge-status badge-completed"><i class="fa-solid fa-check" style="font-size:9px"></i> Completed</span></span>
           </div>
           <div class="rh-entry-stats">
             <span><i class="fa-solid fa-list-check"></i> 1,000 tasks</span>
-            <span><i class="fa-solid fa-chart-simple"></i> 51.2%</span>
+            <span><i class="fa-solid fa-gavel"></i> Judge: GPT-5.2</span>
             <span><i class="fa-solid fa-stopwatch"></i> 5m 18s</span>
-            <span><i class="fa-solid fa-microchip"></i> GPT-5.2, Gemini 3, Claude Opus, Llama 4, Mistral Large</span>
           </div>
-          
-          
         </div><div class="rh-entry" onclick="loadHistoryRun(2)">
           <div class="rh-entry-top">
             <span class="rh-entry-time">Feb 17, 2026 9:00 AM</span>
-            <span class="rh-entry-trigger">Scheduled</span>
             <span class="rh-entry-badge"><span class="badge-status badge-failed"><i class="fa-solid fa-xmark" style="font-size:9px"></i> Failed</span></span>
           </div>
           <div class="rh-entry-stats">
             <span><i class="fa-solid fa-list-check"></i> 29 tasks</span>
-            <span><i class="fa-solid fa-chart-simple"></i> 64.2% (partial)</span>
+            <span><i class="fa-solid fa-gavel"></i> Judge: GPT-5.2</span>
             <span><i class="fa-solid fa-stopwatch"></i> 3m 12s</span>
-            <span><i class="fa-solid fa-microchip"></i> GPT-5.2, Gemini 3, Claude Opus, Llama 4, Mistral Large</span>
           </div>
-          
-          
         </div><div class="rh-entry" onclick="loadHistoryRun(3)">
           <div class="rh-entry-top">
             <span class="rh-entry-time">Feb 10, 2026 9:00 AM</span>
-            <span class="rh-entry-trigger">Scheduled</span>
             <span class="rh-entry-badge"><span class="badge-status badge-completed"><i class="fa-solid fa-check" style="font-size:9px"></i> Completed</span></span>
           </div>
           <div class="rh-entry-stats">
             <span><i class="fa-solid fa-list-check"></i> 1,000 tasks</span>
-            <span><i class="fa-solid fa-chart-simple"></i> 48.7%</span>
+            <span><i class="fa-solid fa-gavel"></i> Judge: GPT-5.2</span>
             <span><i class="fa-solid fa-stopwatch"></i> 7m 05s</span>
-            <span><i class="fa-solid fa-microchip"></i> GPT-5.2, Gemini 3, Claude Opus, Llama 4, Mistral Large</span>
           </div>
-          
-          
         </div></div>
           </div>
         </div>
@@ -3119,7 +3079,7 @@
     
     <script>
     // ── Runs Data ──
-    const statuses = ['Completed', 'Running', 'Canceled', 'Queued'];
+    const statuses = ['Completed', 'Running', 'Failed', 'Canceled', 'Queued'];
     const models = ['GPT-5.2', 'Gemini 3', 'Claude Opus', 'Llama 4', 'Mistral Large'];
     const runNames = ['Rubrics Demo', 'Weekly Eval', 'Prompt QA', 'Scale Test', 'Regression', 'Nightly Run', 'Adhoc Eval', 'Baseline', 'Pilot', 'Sprint 12'];
     const tags = ['Ad-hoc', 'Continuous'];
@@ -3143,7 +3103,7 @@
       status: 'Completed',
       models: ['GPT-5.2', 'Gemini 3', 'Claude Opus', 'Llama 4', 'Mistral Large'],
       created: 'Mar 3, 2026 9:00 AM (PST)',
-      tasks: 1000,
+      tasks: 200,
     };
     const runs = [pinnedRun, ...Array.from({ length: 35 }, () => ({
       name: runNames[Math.floor(Math.random()*runNames.length)],
@@ -3165,7 +3125,7 @@
               <span class="badge-neutral">${r.tag}</span>
             </div>
           </td>
-          <td><span class="badge-status badge-${r.status === 'Completed' ? 'completed' : r.status === 'Running' ? 'running' : r.status === 'Canceled' ? 'failed' : 'scheduled'}">${r.status === 'Running' ? '<span class="pulse"></span> ' : ''}${r.status}</span></td>
+          <td><span class="badge-status badge-${r.status === 'Completed' ? 'completed' : r.status === 'Running' ? 'running' : r.status === 'Failed' ? 'failed' : r.status === 'Canceled' ? 'canceled' : 'scheduled'}">${r.status === 'Running' ? '<span class="pulse"></span> ' : ''}${r.status}</span></td>
           <td style="color:var(--secondary);font-size:13px">
             ${r.models.join(', ')}
           </td>
@@ -3364,15 +3324,19 @@
     let rlRunName = '';
     
     function launchRun(runName) {
+      _runSaved = false;
+      runHistory = [];
       rlRunName = runName || 'New Run';
       showPage('detail');
+      const tabs = document.querySelectorAll('#page-detail .detail-tab');
+      switchDetailTab('dp-results', tabs[0]);
     
       rlModels = wizSolverModels.map((m, i) => ({
         name: m.model || m.strategy,
         url: m.url,
         k: m.kValue,
         runId: randomId(),
-        tasks: 1000,
+        tasks: 200,
         done: 0,
         pct: 0,
         status: 'running',
@@ -3384,7 +3348,7 @@
     
       if (rlModels.length === 0) {
         rlModels = [
-          { name: 'LiteLLMStrategy', url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 1000, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.6 }
+          { name: 'LiteLLMStrategy', url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 200, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.6 }
         ];
       }
     
@@ -3443,10 +3407,9 @@
           <div class="rl-card-bottom">
             <div class="rl-card-time">
               ${m.attempt > 1 ? `<span class="rl-card-attempt">Attempt ${m.attempt}</span>` : ''}
-              <span id="rlTime${i}">${elapsed} \u00B7 ${fmtTime(m.startTime)}${endTime}</span>
+              <span id="rlTime${i}">${elapsed}</span>
             </div>
             <div class="rl-card-actions">
-              ${isDone ? `<button class="rl-btn rl-btn-view" onclick="viewLoadedResults(${i})">View results</button>` : ''}
               ${isFail ? `<button class="rl-btn rl-btn-retry" onclick="retryLoadingModel(${i})"><i class="fa-solid fa-rotate-right"></i> Retry</button>` : ''}
               ${isRunning ? `<button class="rl-btn rl-btn-cancel" onclick="cancelLoadingModel(${i})">Cancel</button>` : ''}
             </div>
@@ -3472,17 +3435,25 @@
         m.done = Math.min(m.done + increment, m.tasks);
         m.pct = Math.round((m.done / m.tasks) * 100);
     
-        if (m.pct > 40 && m.pct < 55 && !m._mayFail && Math.random() < 0.08) {
+        if (m._willFail === undefined && m.pct > 40 && m.pct < 55 && !m._mayFail && Math.random() < 0.08) {
           m._mayFail = true;
         }
-    
+
         const bar = document.getElementById('rlBar' + i);
         const prog = document.getElementById('rlProg' + i);
         const time = document.getElementById('rlTime' + i);
         if (bar) bar.style.width = m.pct + '%';
         if (prog) prog.textContent = m.done.toLocaleString() + ' / ' + m.tasks.toLocaleString();
-        if (time) time.textContent = getElapsedStr(m.startTime) + ' \u00B7 ' + fmtTime(m.startTime);
-    
+        if (time) time.textContent = getElapsedStr(m.startTime);
+
+        if (m._willFail === true && m.pct >= (m._failAt || 62)) {
+          m.status = 'failed';
+          m.error = m._failError || 'HTTP 429 \u2014 Rate limit exceeded after ' + m.done + ' tasks';
+          anyFailed = true;
+          renderLoadingCards();
+          return;
+        }
+
         if (m._mayFail && m.pct >= 48) {
           m.status = 'failed';
           m.error = 'HTTP 429 \u2014 Rate limit exceeded after ' + m.done + ' tasks';
@@ -3508,12 +3479,18 @@
         badge.className = 'rl-badge error';
         badge.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="font-size:10px"></i> Partial failure';
     
+        const anyPartialTasks = rlModels.some(m => m.done > 0);
+        const rlFailedNames = rlModels.filter(m => m.status === 'failed').map(m => m.name);
+        const rlDoneNames = rlModels.filter(m => m.status === 'done').map(m => m.name);
+        const rlCopy = buildErrorCopy(rlFailedNames, rlDoneNames, rlModels.length);
         document.getElementById('rlErrorBanner').innerHTML =
           `<div class="rl-error-banner">
             <i class="fa-solid fa-triangle-exclamation"></i>
-            <span class="rl-error-banner-text"><strong>${failCount} of ${rlModels.length} models failed.</strong> ${doneCount} completed successfully. You can view partial results or retry failed models.</span>
-            ${doneCount > 0 ? '<button class="rl-btn rl-btn-view" onclick="transitionToResults()">View partial results</button>' : ''}
+            <span class="rl-error-banner-text"><strong>${rlCopy.title}</strong> ${rlCopy.msg}</span>
+            ${anyPartialTasks ? '<button class="rl-btn rl-btn-view" onclick="transitionToResults()">View partial results</button>' : ''}
           </div>`;
+
+        saveNewRun(true);
       }
     
       if (allDone && doneCount === rlModels.length) {
@@ -3523,6 +3500,7 @@
         badge.className = 'rl-badge done';
         badge.innerHTML = '<i class="fa-solid fa-check" style="font-size:10px"></i> Completed';
     
+        saveNewRun(false);
         setTimeout(transitionToResults, 1200);
       }
     }
@@ -3572,6 +3550,69 @@
       showPage('landing');
     }
     
+    function buildErrorCopy(failedNames, doneNames, totalCount, opts = {}) {
+      const failCount = failedNames.length;
+      const doneCount = doneNames.length;
+      const canceled = opts.canceled || false;
+      let title, msg;
+
+      if (canceled) {
+        title = 'Run canceled by user.';
+        msg = 'Partial results may be available for tasks that were already evaluated.';
+      } else if (totalCount === 1) {
+        title = failedNames[0] + ' failed to complete.';
+        msg = 'Partial results are available for the tasks that were evaluated. You can retry the run.';
+      } else if (failCount === totalCount) {
+        title = 'All ' + totalCount + ' models failed.';
+        msg = 'Partial results may be available for tasks that were evaluated before the failures.';
+      } else {
+        title = failCount + ' of ' + totalCount + ' models failed.';
+        msg = doneNames.join(', ') + ' completed successfully. Results below reflect only the completed models.';
+      }
+      return { title, msg };
+    }
+
+    let _runSaved = false;
+    function saveNewRun(failed) {
+      if (_runSaved) return;
+      _runSaved = true;
+      const createdStr = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
+      const elapsed = rlStartTime ? getElapsedStr(new Date(rlStartTime)) : '—';
+      const modelNames = rlModels.map(m => m.name);
+      const tasks = rlModels[0]?.tasks || 200;
+      const failedNames = rlModels.filter(m => m.status === 'failed').map(m => m.name);
+
+      runs.unshift({
+        name: rlRunName,
+        id: rlModels[0]?.runId || randomId(),
+        tag: 'Ad-hoc',
+        status: failed ? 'Canceled' : 'Completed',
+        models: modelNames,
+        created: createdStr,
+        tasks: tasks,
+      });
+      renderRuns();
+
+      const modelResults = rlModels.map(m => ({
+        name: m.name,
+        status: m.status === 'done' ? 'Completed' : 'Failed',
+        done: m.done,
+        tasks: m.tasks,
+        error: m.error || null
+      }));
+
+      addRunHistoryEntry({
+        name: rlRunName,
+        time: createdStr,
+        status: failed ? 'Failed' : 'Completed',
+        taskCount: tasks.toLocaleString(),
+        duration: elapsed,
+        models: modelNames,
+        modelResults: modelResults,
+        judgeName: wizJudgeModel.model || wizJudgeModel.strategy,
+      });
+    }
+
     function transitionToResults() {
       document.getElementById('runLoadingOverlay').classList.remove('visible');
       clearInterval(rlInterval);
@@ -3582,7 +3623,7 @@
       document.getElementById('detailCreated').textContent = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
     
       activeRunModels = rlModels.map(m => m.name);
-      activeRunTasks = rlModels[0]?.tasks || 1000;
+      activeRunTasks = rlModels[0]?.tasks || 200;
       rebuildModelCards();
       rebuildResults();
     
@@ -3592,31 +3633,15 @@
     
       if (anyFailed) {
         setRunState('failed');
-        document.getElementById('errorTitle').textContent = failedNames.length + ' of ' + rlModels.length + ' models failed: ' + failedNames.join(', ');
-        document.getElementById('errorMsg').textContent = doneNames.join(', ') + ' completed successfully. You can retry the failed models.';
+        const copy = buildErrorCopy(failedNames, doneNames, rlModels.length);
+        document.getElementById('errorTitle').textContent = copy.title;
+        document.getElementById('errorMsg').textContent = copy.msg;
+        document.getElementById('retryFailedLabel').textContent = rlModels.length === 1 ? 'Retry' : 'Retry failed models';
       } else {
         setRunState('completed');
       }
-    
-      const elapsed = rlStartTime ? getElapsedStr(new Date(rlStartTime)) : '—';
-      addRunHistoryEntry({
-        name: rlRunName,
-        time: new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }),
-        trigger: 'Manual run',
-        status: anyFailed ? 'Failed' : 'Completed',
-        taskCount: activeRunTasks.toLocaleString(),
-        passRate: anyFailed ? '64.2% (partial)' : '49.4%',
-        duration: elapsed,
-        models: activeRunModels,
-        config: {
-          solvers: rlModels.map(m => ({ name: m.name, url: m.url })),
-          judge: { name: wizJudgeModel.model || wizJudgeModel.strategy, url: wizJudgeModel.url },
-          tasks: activeRunTasks + ' tasks'
-        },
-        attempts: anyFailed ? [
-          { num: 1, status: 'Failed', model: failedNames.join(', '), error: 'Partial failure', duration: elapsed }
-        ] : undefined
-      });
+
+      saveNewRun(anyFailed);
     
       const tabs = document.querySelectorAll('#page-detail .detail-tab');
       switchDetailTab('dp-results', tabs[0]);
@@ -3625,7 +3650,46 @@
     function viewLoadedResults(idx) {
       transitionToResults();
     }
-    
+
+    function simulateDemoRun() {
+      _runSaved = false;
+      runHistory = [];
+      rlRunName = 'Demo Run – 2 pass / 1 fail';
+      showPage('detail');
+      const tabs = document.querySelectorAll('#page-detail .detail-tab');
+      switchDetailTab('dp-results', tabs[0]);
+
+      rlModels = [
+        { name: 'Claude Opus',    url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 200, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.7,  _willFail: false },
+        { name: 'Gemini 3 Pro',   url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 200, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.45, _willFail: true, _failAt: 62, _failError: 'HTTP 429 \u2014 Rate limit exceeded after 124 tasks (upstream throttle)' },
+        { name: 'Mistral Large',  url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 200, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.55, _willFail: false },
+      ];
+
+      rlStartTime = Date.now();
+      document.getElementById('rlTitle').textContent = rlRunName;
+      document.getElementById('rlBadge').className = 'rl-badge running';
+      document.getElementById('rlBadge').innerHTML = '<span class="pulse"></span> Running';
+      document.getElementById('rlMeta').textContent = rlModels.length + ' models \u00B7 ' + rlModels[0].tasks.toLocaleString() + ' tasks each';
+      document.getElementById('rlErrorBanner').innerHTML = '';
+
+      renderLoadingCards();
+      document.getElementById('runLoadingOverlay').classList.add('visible');
+
+      clearInterval(rlInterval);
+      clearInterval(rlElapsedInterval);
+
+      rlElapsedInterval = setInterval(() => {
+        const sec = Math.floor((Date.now() - rlStartTime) / 1000);
+        const mm = Math.floor(sec / 60);
+        const ss = sec % 60;
+        document.getElementById('rlElapsed').innerHTML =
+          '<i class="fa-solid fa-stopwatch" style="font-size:10px"></i> ' +
+          (mm > 0 ? mm + 'm ' : '') + ss + 's elapsed';
+      }, 1000);
+
+      rlInterval = setInterval(tickLoading, 300);
+    }
+
     function getElapsedStr(start) {
       const sec = Math.floor((Date.now() - start.getTime()) / 1000);
       if (sec < 60) return sec + 's';
@@ -3650,19 +3714,35 @@
       activeRunTasks = run.tasks || 50;
       rebuildModelCards();
       rebuildResults();
-      const stateMap = { Completed: 'completed', Running: 'running', Canceled: 'failed', Queued: 'scheduled' };
+      const stateMap = { Completed: 'completed', Running: 'running', Failed: 'failed', Canceled: 'canceled', Queued: 'scheduled' };
       const mappedState = stateMap[run.status] || 'completed';
     
+      const isFailed = run.status === 'Failed';
+      const failIdx = isFailed ? Math.floor(Math.random() * activeRunModels.length) : -1;
       runHistory = [
-        { name: run.name, time: run.created || 'Mar 3, 2026 9:00 AM', trigger: run.tag === 'Continuous' ? 'Scheduled' : 'Manual run', status: run.status === 'Canceled' ? 'Failed' : run.status, taskCount: (run.tasks || 50).toLocaleString(), passRate: '49.4%', duration: '6m 42s', models: activeRunModels,
-          config: { solvers: activeRunModels.map(m => ({ name: m, url: 'https://api.example.com/v1/chat' })), judge: { name: 'GPT-5.2', url: 'https://api.example.com/v1/chat' }, tasks: (run.tasks || 50) + ' tasks' }},
-        { name: run.name, time: 'Feb 24, 2026 9:00 AM', trigger: run.tag === 'Continuous' ? 'Scheduled' : 'Manual run', status: 'Completed', taskCount: (run.tasks || 50).toLocaleString(), passRate: '51.2%', duration: '5m 18s', models: activeRunModels },
-        { name: run.name, time: 'Feb 17, 2026 9:00 AM', trigger: 'Scheduled', status: 'Failed', taskCount: '29', passRate: '64.2% (partial)', duration: '3m 12s', models: activeRunModels,
-          attempts: [{ num: 1, status: 'Failed', model: activeRunModels[0], error: 'Rate limit exceeded', duration: '3m 12s' }] },
-        { name: run.name, time: 'Feb 10, 2026 9:00 AM', trigger: 'Scheduled', status: 'Completed', taskCount: (run.tasks || 50).toLocaleString(), passRate: '48.7%', duration: '7m 05s', models: activeRunModels },
+        { name: run.name, time: run.created || 'Mar 3, 2026 9:00 AM', status: run.status, taskCount: (run.tasks || 50).toLocaleString(), duration: '6m 42s', models: activeRunModels, judgeName: 'GPT-5.2',
+          modelResults: activeRunModels.map((m, i) => {
+            if (isFailed && i === failIdx) {
+              const done = Math.floor((run.tasks || 50) * (0.2 + Math.random() * 0.4));
+              return { name: m, status: 'Failed', done: done, tasks: run.tasks || 50, error: 'Connection timeout' };
+            }
+            return { name: m, status: 'Completed', done: run.tasks || 50, tasks: run.tasks || 50, error: null };
+          })},
       ];
     
+      renderRunHistory();
+
+      if (isFailed) {
+        const failedModel = activeRunModels[failIdx];
+        const doneModels = activeRunModels.filter((_, i) => i !== failIdx);
+        const copy = buildErrorCopy([failedModel], doneModels, activeRunModels.length);
+        document.getElementById('errorTitle').textContent = copy.title;
+        document.getElementById('errorMsg').textContent = copy.msg;
+        document.getElementById('retryFailedLabel').textContent = 'Retry failed models';
+      }
+
       setRunState(mappedState);
+
       const tabs = document.querySelectorAll('#page-detail .detail-tab');
       switchDetailTab('dp-results', tabs[0]);
     }
@@ -3673,13 +3753,11 @@
       const badge = document.getElementById('detailBadge');
       const cancel = document.getElementById('cancelBtn');
       const error = document.getElementById('errorBanner');
-      const partial = document.getElementById('partialBanner');
       const duration = document.getElementById('detailDuration');
       const statEta = document.getElementById('statEta');
       const retryBanner = document.getElementById('retryBanner');
-    
+
       error.style.display = 'none';
-      partial.style.display = 'none';
       retryBanner.style.display = 'none';
       cancel.style.display = '';
       duration.innerHTML = '<i class="fa-solid fa-stopwatch" style="font-size:11px"></i> 2m 34s elapsed';
@@ -3712,13 +3790,32 @@
         badge.innerHTML = '<i class="fa-solid fa-xmark" style="font-size:9px"></i> Failed';
         cancel.style.display = 'none';
         error.style.display = 'flex';
-        partial.style.display = 'flex';
         duration.innerHTML = '<i class="fa-solid fa-stopwatch" style="font-size:11px"></i> Failed after 6m 42s';
         statEta.textContent = 'Failed';
         document.getElementById('statTasks').textContent = Math.round(activeRunTasks * 0.58);
         document.getElementById('statTasksSub').textContent = 'of ' + activeRunTasks + ' (partial)';
         document.getElementById('statPassRate').textContent = '64.2%';
         document.getElementById('statPassSub').textContent = 'partial';
+        document.getElementById('statElapsed').textContent = '6m 42s';
+        document.getElementById('statModels').textContent = activeRunModels.length;
+        document.getElementById('resultsShowing').textContent = 'Showing 1-10 of ' + Math.round(activeRunTasks * 0.58);
+        if (!document.getElementById('errorTitle').textContent) {
+          var errCopy = buildErrorCopy([activeRunModels[0] || 'Model'], activeRunModels.slice(1), activeRunModels.length);
+          document.getElementById('errorTitle').textContent = errCopy.title;
+          document.getElementById('errorMsg').textContent = errCopy.msg;
+          document.getElementById('retryFailedLabel').textContent = activeRunModels.length === 1 ? 'Retry' : 'Retry failed models';
+        }
+      } else if (state === 'canceled') {
+        badge.className = 'badge-status badge-canceled';
+        badge.innerHTML = '<i class="fa-solid fa-ban" style="font-size:9px"></i> Canceled';
+        cancel.style.display = 'none';
+        error.style.display = 'flex';
+        duration.innerHTML = '<i class="fa-solid fa-stopwatch" style="font-size:11px"></i> Canceled after 6m 42s';
+        statEta.textContent = 'Canceled';
+        document.getElementById('statTasks').textContent = Math.round(activeRunTasks * 0.58);
+        document.getElementById('statTasksSub').textContent = 'of ' + activeRunTasks + ' (partial)';
+        document.getElementById('statPassRate').textContent = '—';
+        document.getElementById('statPassSub').textContent = '';
         document.getElementById('statElapsed').textContent = '6m 42s';
         document.getElementById('statModels').textContent = activeRunModels.length;
         document.getElementById('resultsShowing').textContent = 'Showing 1-10 of ' + Math.round(activeRunTasks * 0.58);
@@ -3757,35 +3854,33 @@
       }
       container.innerHTML = runHistory.map((r, i) => {
         const isCurrent = i === 0;
-        const badgeClass = r.status === 'Completed' ? 'badge-completed' : r.status === 'Failed' ? 'badge-failed' : r.status === 'Running' ? 'badge-running' : 'badge-scheduled';
-        const badgeIcon = r.status === 'Completed' ? '<i class="fa-solid fa-check" style="font-size:9px"></i> ' : r.status === 'Failed' ? '<i class="fa-solid fa-xmark" style="font-size:9px"></i> ' : '';
-        const configHtml = r.config ? `
-          <button class="rh-config-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('i').style.transform=this.nextElementSibling.classList.contains('open')?'rotate(90deg)':''">
-            <i class="fa-solid fa-chevron-right"></i> Configuration
-          </button>
-          <div class="rh-config-body">
-            ${r.config.solvers ? r.config.solvers.map(s => `<div class="rh-config-row"><span class="rh-config-label">${s.name}</span><span>${s.url}</span></div>`).join('') : ''}
-            ${r.config.judge ? `<div class="rh-config-row"><span class="rh-config-label">Judge: ${r.config.judge.name}</span><span>${r.config.judge.url}</span></div>` : ''}
-            ${r.config.tasks ? `<div class="rh-config-row"><span class="rh-config-label">Tasks</span><span>${r.config.tasks}</span></div>` : ''}
-          </div>` : '';
-        const attemptsHtml = r.attempts && r.attempts.length > 1 ? `
-          <div class="rh-attempts">
-            ${r.attempts.map(a => `<div class="rh-attempt"><span class="rh-attempt-badge ${a.status === 'Failed' ? 'fail' : 'ok'}">${a.status}</span> Attempt ${a.num}${a.model ? ' \u00B7 ' + a.model : ''}${a.error ? ' \u00B7 ' + a.error : ''} \u00B7 ${a.duration || ''}</div>`).join('')}
+        const badgeClass = r.status === 'Completed' ? 'badge-completed' : r.status === 'Failed' ? 'badge-failed' : r.status === 'Canceled' ? 'badge-canceled' : r.status === 'Running' ? 'badge-running' : 'badge-scheduled';
+        const badgeIcon = r.status === 'Completed' ? '<i class="fa-solid fa-check" style="font-size:9px"></i> ' : r.status === 'Failed' ? '<i class="fa-solid fa-xmark" style="font-size:9px"></i> ' : r.status === 'Canceled' ? '<i class="fa-solid fa-ban" style="font-size:9px"></i> ' : '';
+        const judgeName = r.judgeName || (r.config && r.config.judge ? r.config.judge.name : '—');
+        const modelResultsHtml = r.modelResults && r.modelResults.length > 0 ? `
+          <div class="rh-model-results">
+            ${r.modelResults.map(m => {
+              const isOk = m.status === 'Completed';
+              const icon = isOk
+                ? '<i class="fa-solid fa-circle-check" style="color:var(--success-text);font-size:11px"></i>'
+                : '<i class="fa-solid fa-circle-xmark" style="color:var(--tertiary);font-size:11px"></i>';
+              const detail = isOk
+                ? `${m.tasks}/${m.tasks} tasks`
+                : `${m.done}/${m.tasks} tasks` + (m.error ? ` — ${m.error}` : '');
+              return `<div class="rh-model-row">${icon} <span class="rh-model-name">${m.name}</span> <span class="rh-model-detail">${detail}</span></div>`;
+            }).join('')}
           </div>` : '';
         return `<div class="rh-entry${isCurrent ? ' current' : ''}" onclick="loadHistoryRun(${i})">
           <div class="rh-entry-top">
             <span class="rh-entry-time">${r.time}</span>
-            <span class="rh-entry-trigger">${r.trigger || 'Manual run'}</span>
             <span class="rh-entry-badge"><span class="badge-status ${badgeClass}">${badgeIcon}${r.status}</span></span>
           </div>
           <div class="rh-entry-stats">
             <span><i class="fa-solid fa-list-check"></i> ${r.taskCount || '—'} tasks</span>
-            <span><i class="fa-solid fa-chart-simple"></i> ${r.passRate || '—'}</span>
+            <span><i class="fa-solid fa-gavel"></i> Judge: ${judgeName}</span>
             <span><i class="fa-solid fa-stopwatch"></i> ${r.duration || '—'}</span>
-            ${r.models ? `<span><i class="fa-solid fa-microchip"></i> ${r.models.join(', ')}</span>` : ''}
           </div>
-          ${attemptsHtml}
-          ${configHtml}
+          ${modelResultsHtml}
         </div>`;
       }).join('');
     }
@@ -3813,7 +3908,6 @@
       const banner = document.getElementById('retryBanner');
       banner.style.display = 'block';
       document.getElementById('errorBanner').style.display = 'none';
-      document.getElementById('partialBanner').style.display = 'none';
     
       renderRetryBanner();
       clearInterval(retryInterval);
@@ -3862,12 +3956,11 @@
           setRunState('completed');
           addRunHistoryEntry({
             time: new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }),
-            trigger: 'Retry \u2014 ' + retryModels.map(m => m.name).join(', '),
             status: 'Completed',
             taskCount: retryModels.reduce((s, m) => s + m.tasks, 0).toLocaleString(),
-            passRate: '49.4%',
             duration: '2m 10s',
-            models: retryModels.map(m => m.name)
+            models: retryModels.map(m => m.name),
+            judgeName: wizJudgeModel ? (wizJudgeModel.model || wizJudgeModel.strategy) : 'GPT-5.2'
           });
         }, 1500);
       }
@@ -4027,9 +4120,10 @@
       Object.keys(modelState).forEach(n => {
         if (modelState[n].status === 'running') modelState[n].status = 'failed';
       });
-      setRunState('failed');
-      document.getElementById('errorTitle').textContent = 'Run canceled by user';
-      document.getElementById('errorMsg').textContent = 'The run was manually stopped. Partial results are available for the tasks that were evaluated.';
+      setRunState('canceled');
+      const cancelCopy = buildErrorCopy([], [], 0, { canceled: true });
+      document.getElementById('errorTitle').textContent = cancelCopy.title;
+      document.getElementById('errorMsg').textContent = cancelCopy.msg;
     }
     
     function renderResultsTable() {
@@ -4161,7 +4255,7 @@
       renderAllResults();
     }
     
-    let currentMPS = 0;
+    let currentMPS = 2;
     
     rebuildResults();
     
@@ -4736,15 +4830,39 @@
       sel.classList.toggle('placeholder', !sel.value);
     }
     
-    const wizProviders = ['LiteLLM', 'OpenAI', 'Anthropic', 'Google'];
-    const wizModels = ['gpt-4o', 'claude-3.5-sonnet', 'gemini-pro', 'o3-mini', 'llama-4'];
-    
-    function buildSelectHtml(options, selected, placeholder) {
+    const wizProviderModels = {
+      'OpenAI':     ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'o3', 'o3-mini', 'o4-mini'],
+      'Anthropic':  ['claude-4-opus', 'claude-4-sonnet', 'claude-3.5-sonnet', 'claude-3.5-haiku'],
+      'Google':     ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'],
+      'Meta':       ['llama-4-maverick', 'llama-4-scout', 'llama-3.3-70b', 'llama-3.1-405b'],
+      'Mistral':    ['mistral-large', 'mistral-medium', 'mistral-small', 'codestral'],
+      'DeepSeek':   ['deepseek-v3', 'deepseek-r1'],
+    };
+    const wizProviders = Object.keys(wizProviderModels);
+
+    function buildSelectHtml(options, selected, placeholder, extra) {
       const isPlaceholder = !selected;
-      return `<select class="${isPlaceholder ? 'placeholder' : ''}" onchange="wizSelectChanged(this)">` +
+      const disabled = extra?.disabled ? ' disabled' : '';
+      return `<select class="${isPlaceholder ? 'placeholder' : ''}"${disabled} onchange="wizSelectChanged(this)">` +
         `<option value=""${isPlaceholder ? ' selected' : ''}>${placeholder}</option>` +
         options.map(o => `<option value="${o}"${o === selected ? ' selected' : ''}>${o}</option>`).join('') +
         '</select>';
+    }
+
+    function buildModelSelectHtml(provider, selectedModel) {
+      const models = provider ? (wizProviderModels[provider] || []) : [];
+      if (models.length === 0) {
+        return buildSelectHtml([], '', 'Select model', { disabled: true });
+      }
+      return buildSelectHtml(models, selectedModel, 'Select model');
+    }
+
+    function onProviderChange(sel, cardType) {
+      wizSelectChanged(sel);
+      const card = sel.closest('.wiz-model-card');
+      const modelField = card.querySelectorAll('.wiz-mc-row .wiz-mc-field')[1];
+      const provider = sel.value;
+      modelField.innerHTML = '<label>Model</label>' + buildModelSelectHtml(provider, '');
     }
     
     function renderWizSolverCards() {
@@ -4760,11 +4878,11 @@
           <div class="wiz-mc-row">
             <div class="wiz-mc-field">
               <label>Provider</label>
-              ${buildSelectHtml(wizProviders, m.provider, 'Select provider')}
+              ${buildSelectHtml(wizProviders, m.provider, 'Select provider').replace('onchange="wizSelectChanged(this)"', `onchange="onProviderChange(this,'solver')"` )}
             </div>
             <div class="wiz-mc-field">
               <label>Model</label>
-              ${buildSelectHtml(wizModels, m.model, 'Select model')}
+              ${buildModelSelectHtml(m.provider, m.model)}
             </div>
           </div>
           <button class="wiz-mc-adv-toggle ${m.advOpen?'open':''}" onclick="toggleWizAdv(this,${i})">
@@ -4802,11 +4920,11 @@
           <div class="wiz-mc-row">
             <div class="wiz-mc-field">
               <label>Provider</label>
-              ${buildSelectHtml(wizProviders, m.provider, 'Select provider')}
+              ${buildSelectHtml(wizProviders, m.provider, 'Select provider').replace('onchange="wizSelectChanged(this)"', `onchange="onProviderChange(this,'judge')"` )}
             </div>
             <div class="wiz-mc-field">
               <label>Model</label>
-              ${buildSelectHtml(wizModels, m.model, 'Select model')}
+              ${buildModelSelectHtml(m.provider, m.model)}
             </div>
           </div>
           <button class="wiz-mc-adv-toggle" onclick="toggleWizAdv(this,-1)">
