@@ -2,7 +2,7 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pass@K – Ops Hub</title>
+    <title>Pass@K – Ops Hub (Demo)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -1273,7 +1273,7 @@
       .badge-failed { background: rgba(239,68,68,0.08); color: #DC2626; }
       .badge-scheduled { background: var(--neutral-badge-bg); color: var(--secondary); }
       .badge-canceled { background: var(--neutral-badge-bg); color: var(--secondary); }
-      .badge-warning { background: #FFF7ED; color: #92400E; }
+      .badge-warning { background: #FEF3C7; color: #92400E; }
       .badge-status {
         display: inline-flex; align-items: center; gap: 5px;
         padding: 2px 6px; border-radius: 9999px;
@@ -2472,7 +2472,7 @@
       .rpc-model-count { font-size:14px; color:var(--secondary); font-variant-numeric:tabular-nums; white-space:nowrap; flex-shrink:0; }
       .rpc-model-error-wrap { display:flex; flex-direction:column; gap:2px; }
       .rpc-model-error { font-size:12px; color:var(--secondary); margin-top:2px; }
-      .rpc-model-retry { background:none; border:none; color:var(--accent); font-size:12px; font-weight:600; cursor:pointer; padding:0; font-family:Inter,sans-serif; display:inline-flex; align-items:center; gap:4px; margin-top:2px; }
+      .rpc-model-retry { background:none; border:none; color:var(--accent); font-size:12px; font-weight:600; cursor:pointer; padding:0; font-family:Inter,sans-serif; display:inline-flex; align-items:center; gap:4px; }
       .rpc-model-retry:hover { text-decoration:underline; }
       @keyframes rpc-pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
 
@@ -2846,133 +2846,13 @@
             </div>
           </td>
         </tr>
-      
-        <tr>
-          <td>
-            <div class="run-id-cell">
-              <a class="run-id-title" href="javascript:void(0)" onclick="viewRunByIndex(4)" style="color:var(--accent);text-decoration:none;cursor:pointer">Weekly Eval</a>
-              <span class="run-id-sub">bb51d7971a9d7ddd1bac9bbb</span>
-              <span class="badge-neutral">Ad-hoc</span>
-            </div>
-          </td>
-          <td><span class="badge-status badge-running"><span class="pulse"></span> Running</span></td>
-          <td style="color:var(--secondary);font-size:13px">
-            Llama 4, Llama 4
-          </td>
-          <td class="body-r" style="color:var(--secondary)">Sep 21, 2024 2:21 AM (PST)</td>
-          <td>
-            <div class="action-btns">
-              <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
-            </div>
-          </td>
-        </tr>
-      
-        <tr>
-          <td>
-            <div class="run-id-cell">
-              <a class="run-id-title" href="javascript:void(0)" onclick="viewRunByIndex(5)" style="color:var(--accent);text-decoration:none;cursor:pointer">Nightly Run</a>
-              <span class="run-id-sub">6d910087ea753c691d7a794c</span>
-              <span class="badge-neutral">Ad-hoc</span>
-            </div>
-          </td>
-          <td><span class="badge-status badge-completed">Completed</span></td>
-          <td style="color:var(--secondary);font-size:13px">
-            Mistral Large
-          </td>
-          <td class="body-r" style="color:var(--secondary)">Sep 19, 2024 10:06 AM (PST)</td>
-          <td>
-            <div class="action-btns">
-              <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
-            </div>
-          </td>
-        </tr>
-      
-        <tr>
-          <td>
-            <div class="run-id-cell">
-              <a class="run-id-title" href="javascript:void(0)" onclick="viewRunByIndex(6)" style="color:var(--accent);text-decoration:none;cursor:pointer">Pilot</a>
-              <span class="run-id-sub">bd519074381f07502cb99c1f</span>
-              <span class="badge-neutral">Ad-hoc</span>
-            </div>
-          </td>
-          <td><span class="badge-status badge-running"><span class="pulse"></span> Running</span></td>
-          <td style="color:var(--secondary);font-size:13px">
-            Gemini 3
-          </td>
-          <td class="body-r" style="color:var(--secondary)">Aug 5, 2024 7:08 AM (PST)</td>
-          <td>
-            <div class="action-btns">
-              <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
-            </div>
-          </td>
-        </tr>
-      
-        <tr>
-          <td>
-            <div class="run-id-cell">
-              <a class="run-id-title" href="javascript:void(0)" onclick="viewRunByIndex(7)" style="color:var(--accent);text-decoration:none;cursor:pointer">Scale Test</a>
-              <span class="run-id-sub">4169f82d90fa984c34b4cab3</span>
-              <span class="badge-neutral">Ad-hoc</span>
-            </div>
-          </td>
-          <td><span class="badge-status badge-scheduled">Queued</span></td>
-          <td style="color:var(--secondary);font-size:13px">
-            Mistral Large, Gemini 3
-          </td>
-          <td class="body-r" style="color:var(--secondary)">May 1, 2024 3:40 AM (PST)</td>
-          <td>
-            <div class="action-btns">
-              <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
-            </div>
-          </td>
-        </tr>
-      
-        <tr>
-          <td>
-            <div class="run-id-cell">
-              <a class="run-id-title" href="javascript:void(0)" onclick="viewRunByIndex(8)" style="color:var(--accent);text-decoration:none;cursor:pointer">Weekly Eval</a>
-              <span class="run-id-sub">8b620d158cb982847a66ad8b</span>
-              <span class="badge-neutral">Continuous</span>
-            </div>
-          </td>
-          <td><span class="badge-status badge-completed">Completed</span></td>
-          <td style="color:var(--secondary);font-size:13px">
-            Mistral Large, Claude Opus, GPT-5.2
-          </td>
-          <td class="body-r" style="color:var(--secondary)">Dec 11, 2024 2:33 AM (PST)</td>
-          <td>
-            <div class="action-btns">
-              <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
-            </div>
-          </td>
-        </tr>
-      
-        <tr>
-          <td>
-            <div class="run-id-cell">
-              <a class="run-id-title" href="javascript:void(0)" onclick="viewRunByIndex(9)" style="color:var(--accent);text-decoration:none;cursor:pointer">Nightly Run</a>
-              <span class="run-id-sub">3dca6f1f30efe951287dcf75</span>
-              <span class="badge-neutral">Continuous</span>
-            </div>
-          </td>
-          <td><span class="badge-status badge-completed">Completed</span></td>
-          <td style="color:var(--secondary);font-size:13px">
-            GPT-5.2
-          </td>
-          <td class="body-r" style="color:var(--secondary)">Jul 15, 2024 3:34 AM (PST)</td>
-          <td>
-            <div class="action-btns">
-              <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
-            </div>
-          </td>
-        </tr>
       </tbody>
             </table>
             <div class="table-footer">
-              <div class="page-btns" id="landingPageBtns"><button class="page-btn" disabled=""><i class="fa-solid fa-angles-left"></i></button><button class="page-btn" disabled=""><i class="fa-solid fa-chevron-left"></i></button><button class="page-btn active">1</button><button class="page-btn ">2</button><button class="page-btn ">3</button><button class="page-btn ">4</button><button class="page-btn ">5</button><button class="page-btn ">6</button><span style="color:var(--tertiary);font-size:12px;padding:0 4px">...</span><button class="page-btn">10</button><button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button><button class="page-btn"><i class="fa-solid fa-angles-right"></i></button></div>
+              <div class="page-btns" id="landingPageBtns"><button class="page-btn" disabled=""><i class="fa-solid fa-angles-left"></i></button><button class="page-btn" disabled=""><i class="fa-solid fa-chevron-left"></i></button><button class="page-btn active">1</button><button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button><button class="page-btn"><i class="fa-solid fa-angles-right"></i></button></div>
               <div class="rows-select">
                 <select><option>10 rows per page</option></select>
-                <span>Showing 1-10 of 36</span>
+                <span>Showing 1-4 of 4</span>
               </div>
             </div>
           </div>
@@ -3382,22 +3262,19 @@ Do not include any other text before or after the JSON object</textarea>
               <div class="rdh-title-group">
                 <div class="rdh-title-badges">
                   <h2 class="h4-sb" id="detailTitle">Weekly Eval</h2>
+                  <span class="rdh-tag-badge" id="detailTag">Ad-hoc</span>
                   <span class="badge-status badge-completed" id="detailBadge">Completed</span>
                 </div>
-                <span class="rdh-tag-badge" id="detailTag">Ad-hoc</span>
               </div>
               <div class="rdh-actions" id="detailActions">
-                <button class="rdh-duplicate-btn" onclick="duplicateRun()">Duplicate and edit</button>
+                <button class="rdh-duplicate-btn" onclick="duplicateRun()">Duplicate</button>
                 <button class="btn-danger" id="cancelBtn" onclick="cancelRun()" style="display: none;"><i class="fa-solid fa-stop"></i> Cancel</button>
               </div>
             </div>
             <div class="rdh-meta">
               <span class="rdh-meta-text" id="detailCreated">Created by user on Mar 3, 2026 at 9:00 AM</span>
-              <div class="rdh-run-id-row">
-                <span class="rdh-meta-text">Run ID: <span id="detailId">67bfae2325e3adfab47b3147</span></span>
-                <button class="rdh-copy-btn" onclick="copyRunId()"><i class="fa-regular fa-copy"></i> Run ID</button>
-                <span class="rdh-meta-text" id="detailDuration" style="display:none"></span>
-              </div>
+              <span class="rdh-meta-text" id="detailId" style="display:none"></span>
+              <span class="rdh-meta-text" id="detailDuration" style="display:none"></span>
             </div>
           </div>
     
@@ -3905,7 +3782,7 @@ Do not include any other text before or after the JSON object</textarea>
         url: m.url,
         k: m.kValue,
         runId: randomId(),
-        tasks: 1000,
+        tasks: 200,
         done: 0,
         pct: 0,
         status: 'running',
@@ -3917,7 +3794,7 @@ Do not include any other text before or after the JSON object</textarea>
     
       if (rlModels.length === 0) {
         rlModels = [
-          { name: 'LiteLLMStrategy', url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 1000, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.6 }
+          { name: 'LiteLLMStrategy', url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 200, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.6 }
         ];
       }
     
@@ -3927,6 +3804,7 @@ Do not include any other text before or after the JSON object</textarea>
       document.getElementById('detailId').textContent = rlModels[0]?.runId || randomId();
       document.getElementById('detailCreated').textContent = 'Created on ' + new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
       document.getElementById('detailTag').textContent = 'Ad-hoc';
+      activeRunTag = 'Ad-hoc';
 
       var detBadge = document.getElementById('detailBadge');
       if (detBadge) { detBadge.className = 'badge-status badge-running'; detBadge.innerHTML = '<span class="pulse"></span> Running'; }
@@ -3938,7 +3816,7 @@ Do not include any other text before or after the JSON object</textarea>
       var rpcCard = document.getElementById('runProgressCard');
       rpcCard.style.display = 'block';
       rpcCard.classList.remove('rpc-hiding');
-      document.getElementById('rpcJudge').innerHTML = '<i class="fa-solid fa-gear"></i> Judge: ' + judgeName + ' \u00B7 ' + activeRunTasks + ' tasks each';
+      document.getElementById('rpcJudge').innerHTML = '<i class="fa-solid fa-gear"></i> Judge: ' + judgeName;
 
       var resOrig = document.getElementById('res-original');
       if (resOrig) resOrig.style.display = 'none';
@@ -4105,8 +3983,9 @@ Do not include any other text before or after the JSON object</textarea>
 
     function renderRunProgressCard() {
       var totalDone = rlModels.reduce(function(s, m) { return s + m.done; }, 0);
-      var totalTasks = rlModels.reduce(function(s, m) { return s + m.tasks; }, 0);
-      var overallPct = totalTasks > 0 ? Math.round(totalDone / totalTasks * 100) : 0;
+      var totalTasks = rlModels.length > 0 ? rlModels[0].tasks : 0;
+      var totalDoneAvg = Math.round(totalDone / (rlModels.length || 1));
+      var overallPct = totalTasks > 0 ? Math.round(totalDoneAvg / totalTasks * 100) : 0;
 
       var pctEl = document.getElementById('rpcPct');
       var tasksEl = document.getElementById('rpcTasks');
@@ -4115,7 +3994,7 @@ Do not include any other text before or after the JSON object</textarea>
       if (!pctEl || !modelsEl) return;
 
       pctEl.textContent = overallPct + '%';
-      tasksEl.textContent = totalDone.toLocaleString() + ' / ' + totalTasks.toLocaleString() + ' tasks';
+      tasksEl.textContent = totalDoneAvg.toLocaleString() + ' / ' + totalTasks.toLocaleString() + ' tasks';
       fillEl.style.width = overallPct + '%';
 
       var allDone = rlModels.every(function(m) { return m.status === 'done'; });
@@ -4136,8 +4015,7 @@ Do not include any other text before or after the JSON object</textarea>
         var errorHtml = '';
         if (isFail && m.error) {
           var errMsg = m.error.replace(/^HTTP \d+ . /, '');
-          errorHtml = '<div class="rpc-model-error">' + errMsg + '</div>'
-            + '<button class="rpc-model-retry" onclick="retryRunProgressModel(' + idx + ')"><i class="fa-solid fa-rotate-right" style="font-size:10px"></i> Retry</button>';
+          errorHtml = '<div class="rpc-model-error">' + errMsg + ' &nbsp;<button class="rpc-model-retry" onclick="retryRunProgressModel(' + idx + ')"><i class="fa-solid fa-rotate-right" style="font-size:10px"></i> Retry</button></div>';
         }
 
         var nameContent = errorHtml
@@ -4199,6 +4077,9 @@ Do not include any other text before or after the JSON object</textarea>
 
       var errorBanner = document.getElementById('errorBanner');
       if (errorBanner) errorBanner.style.display = 'none';
+
+      var rpcCard = document.getElementById('runProgressCard');
+      if (rpcCard) { rpcCard.style.display = 'block'; rpcCard.classList.remove('rpc-hiding'); }
 
       renderAllResults();
       var tabs = document.querySelectorAll('#page-detail .detail-tab');
@@ -4545,7 +4426,7 @@ Do not include any other text before or after the JSON object</textarea>
       var rpcCard2 = document.getElementById('runProgressCard');
       rpcCard2.style.display = 'block';
       rpcCard2.classList.remove('rpc-hiding');
-      document.getElementById('rpcJudge').innerHTML = '<i class="fa-solid fa-gear"></i> Judge: ' + judgeName2 + ' \u00B7 ' + activeRunTasks + ' tasks each';
+      document.getElementById('rpcJudge').innerHTML = '<i class="fa-solid fa-gear"></i> Judge: ' + judgeName2;
       renderRunProgressCard();
 
       clearInterval(rlInterval);
@@ -5333,8 +5214,8 @@ Do not include any other text before or after the JSON object</textarea>
       if (sc) {
         sc.innerHTML = `
           <div class="ssc"><div class="ssc-label">Tasks evaluated</div><div class="ssc-value">${m.tasks} <span style="font-size:12px;font-weight:400;color:var(--tertiary)">/${activeRunTasks}</span></div><div class="ssc-sub">100%</div></div>
-          <div class="ssc"><div class="ssc-label">Mandatory pass@${K_RUNS} <svg class="ssc-info-icon" viewBox="0 0 512 512" fill="var(--tertiary)"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm-40-176h24v-64h-24a16 16 0 0 1 0-32h40a16 16 0 0 1 16 16v80h8a16 16 0 0 1 0 32h-64a16 16 0 0 1 0-32zm40-144a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/></svg></div><div class="ssc-value">${m.mand.toFixed(2)}%</div></div>
-          <div class="ssc"><div class="ssc-label">All-criteria pass@${K_RUNS} <svg class="ssc-info-icon" viewBox="0 0 512 512" fill="var(--tertiary)"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm-40-176h24v-64h-24a16 16 0 0 1 0-32h40a16 16 0 0 1 16 16v80h8a16 16 0 0 1 0 32h-64a16 16 0 0 1 0-32zm40-144a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/></svg></div><div class="ssc-value">${m.all.toFixed(2)}%</div></div>`;
+          <div class="ssc"><div class="ssc-label">Mandatory pass rate @${K_RUNS} <svg class="ssc-info-icon" viewBox="0 0 512 512" fill="var(--tertiary)"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm-40-176h24v-64h-24a16 16 0 0 1 0-32h40a16 16 0 0 1 16 16v80h8a16 16 0 0 1 0 32h-64a16 16 0 0 1 0-32zm40-144a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/></svg></div><div class="ssc-value">${m.mand.toFixed(2)}%</div></div>
+          <div class="ssc"><div class="ssc-label">All-criteria pass rate @${K_RUNS} <svg class="ssc-info-icon" viewBox="0 0 512 512" fill="var(--tertiary)"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm-40-176h24v-64h-24a16 16 0 0 1 0-32h40a16 16 0 0 1 16 16v80h8a16 16 0 0 1 0 32h-64a16 16 0 0 1 0-32zm40-144a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/></svg></div><div class="ssc-value">${m.all.toFixed(2)}%</div></div>`;
       }
     
       document.getElementById('distChartTitle').textContent = `Pass Rate @5 Distribution`;
@@ -6076,7 +5957,13 @@ Do not include any other text before or after the JSON object</textarea>
     let wizCurrentStep = 1;
     const wizStepLabels = ['','Run config','Solver models','Judge model','Tasks','Summary'];
     
-    const wizSolverModels = [];
+    const wizSolverModels = [
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'OpenAI', model:'GPT-5.2', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 },
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'Google', model:'Gemini 3', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 },
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'Anthropic', model:'Claude Opus', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 },
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'Meta', model:'Llama 4', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 },
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'Mistral', model:'Mistral Large', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 }
+    ];
     const wizJudgeModel = {
       strategy:'LiteLLMStrategy',
       url:'https://hyperplant.io.naver.com/v1/proxy/call_llm',
@@ -6148,11 +6035,11 @@ Do not include any other text before or after the JSON object</textarea>
     }
     
     const wizProviderModels = {
-      'OpenAI':     ['gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'o3', 'o3-mini', 'o4-mini'],
-      'Anthropic':  ['claude-4-opus', 'claude-4-sonnet', 'claude-3.5-sonnet', 'claude-3.5-haiku'],
-      'Google':     ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'],
-      'Meta':       ['llama-4-maverick', 'llama-4-scout', 'llama-3.3-70b', 'llama-3.1-405b'],
-      'Mistral':    ['mistral-large', 'mistral-medium', 'mistral-small', 'codestral'],
+      'OpenAI':     ['GPT-5.2', 'gpt-4o', 'gpt-4o-mini', 'gpt-4-turbo', 'o3', 'o3-mini', 'o4-mini'],
+      'Anthropic':  ['Claude Opus', 'claude-4-opus', 'claude-4-sonnet', 'claude-3.5-sonnet', 'claude-3.5-haiku'],
+      'Google':     ['Gemini 3', 'gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'],
+      'Meta':       ['Llama 4', 'llama-4-maverick', 'llama-4-scout', 'llama-3.3-70b', 'llama-3.1-405b'],
+      'Mistral':    ['Mistral Large', 'mistral-large', 'mistral-medium', 'mistral-small', 'codestral'],
       'DeepSeek':   ['deepseek-v3', 'deepseek-r1'],
     };
     const wizProviders = Object.keys(wizProviderModels);
@@ -6344,7 +6231,7 @@ Do not include any other text before or after the JSON object</textarea>
       const mode = modeEl ? modeEl.querySelector('.wiz-radio-title').textContent : 'Ad-hoc';
       const typeEl = document.querySelector('[onclick*="wizSelectRadio(this,\'wizType\')"].selected');
       const type = typeEl ? typeEl.querySelector('.wiz-radio-title').textContent : 'HLE';
-      const taskCount = 1000;
+      const taskCount = 200;
       const solverCount = Math.max(wizSolverModels.length, 1);
       const totalCost = taskCount * solverCount * 0.30;
       const costStr = '$' + totalCost.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0});
@@ -6360,9 +6247,9 @@ Do not include any other text before or after the JSON object</textarea>
       let idx = 0;
       const solverRows = d.solvers.map(s => {
         const i = idx++;
-        return `<div class="sum-a-model-row"><span class="sum-a-model-role">Solver</span><span class="sum-a-model-name">${s.name}</span><span class="sum-a-model-k">K=${s.k}</span><span class="sum-ep-status idle" id="sumEpSt${i}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
+        return `<div class="sum-a-model-row"><span class="sum-a-model-role">Solver</span><span class="sum-a-model-name">${s.name}</span><span class="sum-a-model-k">K=${s.k}</span><span class="sum-ep-status success" id="sumEpSt${i}"><i class="fa-solid fa-circle-check"></i> Ready</span></div>`;
       }).join('');
-      const judgeRow = `<div class="sum-a-model-row"><span class="sum-a-model-role">Judge</span><span class="sum-a-model-name">${d.judge.name}</span><span class="sum-a-model-k">K=${d.judge.k}</span><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
+      const judgeRow = `<div class="sum-a-model-row"><span class="sum-a-model-role">Judge</span><span class="sum-a-model-name">${d.judge.name}</span><span class="sum-a-model-k">K=${d.judge.k}</span><span class="sum-ep-status success" id="sumEpSt${idx}"><i class="fa-solid fa-circle-check"></i> Ready</span></div>`;
       const colPills = d.cols.map(c => `<span class="sum-col-pill">${c}</span>`).join('');
 
       return `<div class="sum-a">
@@ -6378,8 +6265,8 @@ Do not include any other text before or after the JSON object</textarea>
         </div>
         <div class="sum-a-models">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div class="sum-section-title" style="margin-bottom:0">Endpoints</div>
-            <button class="wiz-btn-outline summary-test-btn" id="sumTestBtn" onclick="testEndpoints()"><i class="fa-solid fa-rotate"></i> Test endpoints</button>
+            <div class="sum-section-title" style="margin-bottom:0">Models</div>
+            <button class="wiz-btn-outline summary-test-btn" id="sumTestBtn" onclick="testEndpoints()"><i class="fa-solid fa-rotate"></i> Re-test endpoints</button>
           </div>
           <div id="sumEndpointsBody">${solverRows}${judgeRow}</div>
         </div>
@@ -6394,9 +6281,9 @@ Do not include any other text before or after the JSON object</textarea>
       let idx = 0;
       const solverRows = d.solvers.map(s => {
         const i = idx++;
-        return `<div class="sum-b-model-row"><span class="sum-b-model-role solver">Solver</span><span class="sum-b-model-name">${s.name}</span><span class="sum-b-model-k">K=${s.k}</span><span class="sum-ep-status idle" id="sumEpSt${i}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
+        return `<div class="sum-b-model-row"><span class="sum-b-model-role solver">Solver</span><span class="sum-b-model-name">${s.name}</span><span class="sum-b-model-k">K=${s.k}</span><span class="sum-ep-status success" id="sumEpSt${i}"><i class="fa-solid fa-circle-check"></i> Ready</span></div>`;
       }).join('');
-      const judgeRow = `<div class="sum-b-model-row"><span class="sum-b-model-role judge">Judge</span><span class="sum-b-model-name">${d.judge.name}</span><span class="sum-b-model-k">K=${d.judge.k}</span><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
+      const judgeRow = `<div class="sum-b-model-row"><span class="sum-b-model-role judge">Judge</span><span class="sum-b-model-name">${d.judge.name}</span><span class="sum-b-model-k">K=${d.judge.k}</span><span class="sum-ep-status success" id="sumEpSt${idx}"><i class="fa-solid fa-circle-check"></i> Ready</span></div>`;
       const colPills = d.cols.map(c => `<span class="sum-col-pill">${c}</span>`).join('');
 
       return `<div class="sum-b">
@@ -6417,8 +6304,8 @@ Do not include any other text before or after the JSON object</textarea>
           </div>
           <div class="sum-b-panel">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-              <div class="sum-section-title" style="margin-bottom:0">Endpoints</div>
-              <button class="wiz-btn-outline summary-test-btn" id="sumTestBtn" onclick="testEndpoints()"><i class="fa-solid fa-rotate"></i> Test</button>
+              <div class="sum-section-title" style="margin-bottom:0">Models</div>
+              <button class="wiz-btn-outline summary-test-btn" id="sumTestBtn" onclick="testEndpoints()"><i class="fa-solid fa-rotate"></i> Re-test endpoints</button>
             </div>
             <div id="sumEndpointsBody">${solverRows}${judgeRow}</div>
           </div>
@@ -6430,9 +6317,9 @@ Do not include any other text before or after the JSON object</textarea>
       let idx = 0;
       const solverRows = d.solvers.map(s => {
         const i = idx++;
-        return `<div class="sum-c-model-row"><span class="sum-c-model-name">${s.name}</span><span class="sum-c-model-k">K=${s.k}</span><div class="sum-c-model-status"><span class="sum-ep-status idle" id="sumEpSt${i}"><i class="fa-solid fa-minus"></i> Not tested</span></div></div>`;
+        return `<div class="sum-c-model-row"><span class="sum-c-model-name">${s.name}</span><span class="sum-c-model-k">K=${s.k}</span><div class="sum-c-model-status"><span class="sum-ep-status success" id="sumEpSt${i}"><i class="fa-solid fa-circle-check"></i> Ready</span></div></div>`;
       }).join('');
-      const judgeRow = `<div class="sum-c-model-row"><span class="sum-c-model-name">${d.judge.name}</span><span class="sum-c-model-k">K=${d.judge.k}</span><div class="sum-c-model-status"><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div></div>`;
+      const judgeRow = `<div class="sum-c-model-row"><span class="sum-c-model-name">${d.judge.name}</span><span class="sum-c-model-k">K=${d.judge.k}</span><div class="sum-c-model-status"><span class="sum-ep-status success" id="sumEpSt${idx}"><i class="fa-solid fa-circle-check"></i> Ready</span></div></div>`;
       const colPills = d.cols.map(c => `<span class="sum-col-pill">${c}</span>`).join('');
 
       return `<div class="sum-c">
@@ -6441,7 +6328,7 @@ Do not include any other text before or after the JSON object</textarea>
           <div class="sum-c-meta"><span><span class="sum-c-meta-label">Mode</span> <span id="sumRunMode">${d.mode}</span></span><span><span class="sum-c-meta-label">Type</span> <span id="sumRunType">${d.type}</span></span></div>
         </div>
         <div>
-          <div style="display:flex;align-items:center;justify-content:space-between"><div class="sum-section-title" style="margin-bottom:8px">Models</div><button class="wiz-btn-outline summary-test-btn" id="sumTestBtn" onclick="testEndpoints()"><i class="fa-solid fa-rotate"></i> Test endpoints</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between"><div class="sum-section-title" style="margin-bottom:8px">Models</div><button class="wiz-btn-outline summary-test-btn" id="sumTestBtn" onclick="testEndpoints()"><i class="fa-solid fa-rotate"></i> Re-test endpoints</button></div>
           <div id="sumEndpointsBody"><div class="sum-c-model-sub">Solver models (${d.solverCount})</div>${solverRows}<div class="sum-c-model-sub">Judge model</div>${judgeRow}</div>
         </div>
         <div><div class="sum-section-title">Tasks (${d.taskCount.toLocaleString()})</div><div class="sum-c-task-cols">Task query output <div id="sumDataColumns" style="display:inline-flex;gap:4px">${colPills}</div></div></div>
@@ -6453,9 +6340,9 @@ Do not include any other text before or after the JSON object</textarea>
       let idx = 0;
       const solverItems = d.solvers.map(s => {
         const i = idx++;
-        return `<div class="sum-d-model-item"><span class="sum-d-model-dot idle" id="sumDot${i}"></span><span class="sum-d-model-label">${s.name}</span><span class="sum-d-model-k">K=${s.k}</span></div>`;
+        return `<div class="sum-d-model-item"><span class="sum-d-model-dot success" id="sumDot${i}"></span><span class="sum-d-model-label">${s.name}</span><span class="sum-d-model-k">K=${s.k}</span></div>`;
       }).join('');
-      const judgeItem = `<div class="sum-d-model-item"><span class="sum-d-model-dot idle" id="sumDot${idx}"></span><span class="sum-d-model-label">${d.judge.name}</span></div>`;
+      const judgeItem = `<div class="sum-d-model-item"><span class="sum-d-model-dot success" id="sumDot${idx}"></span><span class="sum-d-model-label">${d.judge.name}</span></div>`;
       const colPills = d.cols.map(c => `<span class="sum-col-pill">${c}</span>`).join('');
 
       return `<div class="sum-d">
@@ -6469,8 +6356,8 @@ Do not include any other text before or after the JSON object</textarea>
         <div class="sum-d-divider"></div>
         <div>
           <div class="sum-d-ep-header">
-            <span class="sum-d-ep-title">Endpoints</span>
-            <button class="wiz-btn-outline summary-test-btn" id="sumTestBtn" onclick="testEndpoints()"><i class="fa-solid fa-rotate"></i> Test endpoints</button>
+            <span class="sum-d-ep-title">Models</span>
+            <button class="wiz-btn-outline summary-test-btn" id="sumTestBtn" onclick="testEndpoints()"><i class="fa-solid fa-rotate"></i> Re-test endpoints</button>
           </div>
           <div id="sumEndpointsBody">
             <div class="sum-d-role-group">
@@ -6535,7 +6422,7 @@ Do not include any other text before or after the JSON object</textarea>
           const st = row.querySelector('.sum-ep-status, .sum-d-model-st');
           const dot = row.querySelector('.sum-d-model-dot');
           if (!st && !dot) return;
-          const success = Math.random() > 0.15;
+          const success = true;
           if (success) {
             const latency = Math.floor(80 + Math.random() * 320);
             if (st) {
@@ -6564,20 +6451,17 @@ Do not include any other text before or after the JSON object</textarea>
       });
     }
 
+    const _demoSolverPresets = [
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'OpenAI', model:'GPT-5.2', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 },
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'Google', model:'Gemini 3', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 },
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'Anthropic', model:'Claude Opus', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 },
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'Meta', model:'Llama 4', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 },
+      { strategy:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', provider:'Mistral', model:'Mistral Large', kValue:5, advOpen:false, timeout:3, maxTokens:3, temperature:0 }
+    ];
     function initWizard() {
       wizCurrentStep = 1;
       wizSolverModels.length = 0;
-      wizSolverModels.push({
-        strategy: 'LiteLLMStrategy',
-        url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm',
-        provider: '',
-        model: '',
-        kValue: 5,
-        advOpen: false,
-        timeout: 3,
-        maxTokens: 3,
-        temperature: 3
-      });
+      _demoSolverPresets.forEach(p => wizSolverModels.push(Object.assign({}, p)));
       wizGoTo(1);
       renderWizSolverCards();
       renderWizJudgeCard();
