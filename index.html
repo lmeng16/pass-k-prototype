@@ -416,12 +416,11 @@
     
     .data-table thead th {
       padding: 8px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 400;
       color: var(--secondary);
       text-align: left;
       background: var(--table-header-bg);
-      border-top: 1px solid var(--border);
       border-left: 1px solid var(--border);
       white-space: nowrap;
       letter-spacing: -0.16px;
@@ -1194,7 +1193,8 @@
       .rdh-title-badges {
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 8px;
+        flex-wrap: wrap;
       }
       .rdh-tag-badge {
         display: inline-flex;
@@ -1273,7 +1273,7 @@
       .badge-failed { background: rgba(239,68,68,0.08); color: #DC2626; }
       .badge-scheduled { background: var(--neutral-badge-bg); color: var(--secondary); }
       .badge-canceled { background: var(--neutral-badge-bg); color: var(--secondary); }
-      .badge-warning { background: #FFF7ED; color: #92400E; }
+      .badge-warning { background: #FEF3C7; color: #92400E; }
       .badge-status {
         display: inline-flex; align-items: center; gap: 5px;
         padding: 2px 6px; border-radius: 9999px;
@@ -2024,6 +2024,131 @@
       .rubric-drawer-body {
         padding: 20px 24px 24px; overflow-y: auto; flex: 1;
       }
+
+      /* ═══ Run Details side drawer ═══ */
+      .rd-overlay {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 900;
+        opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+      }
+      .rd-overlay.open { opacity: 1; pointer-events: auto; }
+      .rd-drawer {
+        position: fixed; top: 0; right: 0; bottom: 0; z-index: 910;
+        width: 720px; max-width: 92vw;
+        background: var(--white);
+        box-shadow: -4px 0 32px rgba(0,0,0,0.15);
+        transform: translateX(100%); transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+        display: flex; flex-direction: column;
+      }
+      .rd-overlay.open .rd-drawer { transform: translateX(0); }
+
+      .rd-toolbar {
+        display: flex; align-items: center; gap: 8px;
+        padding: 12px 12px 4px;
+      }
+      .rd-toolbar-btn {
+        width: 32px; height: 32px; border-radius: 9999px;
+        display: flex; align-items: center; justify-content: center;
+        background: none; border: none;
+        font-size: 16px; color: #818EA9; cursor: pointer;
+        transition: background 0.12s, color 0.12s;
+        flex-shrink: 0;
+      }
+      .rd-toolbar-btn:hover { background: rgba(0,44,137,0.05); color: var(--primary); }
+      .rd-toolbar-divider {
+        width: 1px; height: 16px; background: #D1DAEB; flex-shrink: 0;
+      }
+
+      .rd-body {
+        padding: 0 24px 24px; overflow-y: auto; flex: 1;
+      }
+
+      .rd-title {
+        font-size: 18px; font-weight: 600; color: var(--primary); margin: 8px 0 16px;
+      }
+
+      .rd-data-list {
+        display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;
+      }
+      .rd-data-row {
+        display: flex; align-items: baseline; gap: 8px; font-size: 14px; line-height: 1.43;
+      }
+      .rd-data-label {
+        width: 90px; flex-shrink: 0; color: #5B6579; font-weight: 400;
+      }
+      .rd-data-value {
+        flex: 1; color: var(--primary); font-weight: 400;
+      }
+
+      .rd-divider {
+        height: 1px; background: var(--border); margin: 0 0 20px;
+      }
+
+      .rd-model-table-wrap {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--white);
+        overflow: hidden;
+      }
+      .rd-model-table {
+        width: 100%; border-collapse: collapse; font-size: 13px;
+      }
+      .rd-model-table thead th {
+        padding: 8px 12px; font-size: 12px; font-weight: 500;
+        color: var(--secondary); text-align: left;
+        background: var(--table-header-bg); border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+      .rd-model-table thead th.sortable { cursor: pointer; }
+      .rd-model-table thead th .sort-icon { font-size:10px; margin-left:4px; color:var(--tertiary); }
+      .rd-model-table tbody tr {
+        border-bottom: 1px solid var(--border);
+      }
+      .rd-model-table tbody tr:last-child { border-bottom: none; }
+      .rd-model-table tbody tr.rd-no-border { border-bottom: none; }
+      .rd-model-table tbody td {
+        padding: 10px 12px; vertical-align: middle; color: var(--primary);
+      }
+
+      .rd-model-cell {
+        display: flex; align-items: center; gap: 6px;
+      }
+      .rd-model-cell-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+      .rd-model-name { font-size: 13px; font-weight: 600; color: var(--primary); white-space: nowrap; display: inline-flex; align-items: center; }
+      .rd-model-id { font-size: 12px; color: var(--secondary); font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+      .rd-model-copy-btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 24px; height: 24px; border: none; background: none;
+        color: var(--tertiary); cursor: pointer; border-radius: 4px;
+        font-size: 11px; flex-shrink: 0;
+        transition: color 0.12s, background 0.12s;
+      }
+      .rd-model-copy-btn:hover { color: var(--accent); background: var(--accent-bg); }
+
+      .rd-duration-cell { font-variant-numeric: tabular-nums; color: var(--secondary); }
+      .rd-tasks-cell { font-variant-numeric: tabular-nums; color: var(--secondary); }
+      .rd-obs-cell { display: flex; gap: 8px; align-items: center; }
+      .rd-obs-link {
+        display: inline-flex; align-items: center; gap: 4px;
+        font-size: 12px; font-weight: 500; color: var(--secondary);
+        text-decoration: none; cursor: pointer;
+        transition: color 0.12s;
+      }
+      .rd-obs-link:hover { color: var(--accent); }
+      .rd-obs-link i { font-size: 10px; }
+
+      .rd-run-label {
+        display: inline-flex; align-items: center;
+        font-size: 11px; font-weight: 500;
+        color: var(--secondary); background: var(--neutral-badge-bg, #F3F4F6);
+        padding: 1px 6px; border-radius: 9999px;
+        white-space: nowrap; margin-left: 4px;
+      }
+
+      .rd-table-footer {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 12px; border-top: 1px solid var(--border);
+        font-size: 12px; color: var(--secondary); flex-wrap: wrap; gap: 8px;
+      }
     
       /* Rubric viz switcher */
       .rubric-viz-tabs {
@@ -2150,6 +2275,15 @@
       .wiz-btn-run-passk { background:var(--accent-btn); gap:6px; }
       .wiz-btn-add { display:inline-flex; align-items:center; gap:6px; height:36px; padding:0 14px; border:1px solid rgba(7,1,255,0.29); border-radius:4px; background:var(--white); color:var(--accent); font-size:14px; font-weight:500; font-family:Inter,sans-serif; cursor:pointer; margin-top:12px; }
       .wiz-btn-add:hover { background:var(--accent-badge-bg); }
+      .wiz-preset-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+      .wiz-preset-label { font-size:13px; font-weight:500; color:var(--secondary); white-space:nowrap; }
+      .wiz-preset-badge {
+        display:inline-flex; align-items:center; height:24px; padding:0 10px;
+        border:none; border-radius:9999px; background:rgba(0, 54, 175, 0.07);
+        color:#5B6579; font-size:12px; font-weight:500; font-family:Inter,sans-serif;
+        cursor:pointer; transition:all 0.15s;
+      }
+      .wiz-preset-badge:hover { background:rgba(0, 54, 175, 0.14); }
       .wiz-link { color:var(--secondary); font-size:14px; cursor:pointer; text-decoration:none; }
       .wiz-link:hover { color:var(--accent); }
       .wiz-req-cols { font-size:14px; color:var(--primary); margin-bottom:4px; }
@@ -2307,6 +2441,182 @@
       .sum-d-meta-value { color:var(--primary); }
 
       .sum-d-divider { height:1px; background:#D1DAEB; margin:16px 0; }
+
+      .tr-view { display:none; flex-direction:column; gap:16px; }
+      .tr-view.active { display:flex; }
+      .tr-back-btn {
+        display:inline-flex; align-items:center; gap:6px; border:none; background:none;
+        font-size:13px; font-weight:600; color:#5B6579; cursor:pointer; padding:0;
+        font-family:Inter,sans-serif;
+      }
+      .tr-back-btn:hover { color:var(--accent); }
+      .tr-title { font-size:18px; font-weight:600; color:#19202F; }
+      .tr-table-wrap {
+        border:1px solid #D1DAEB; border-radius:4px; background:#fff; overflow-x:auto;
+      }
+      .tr-table { width:100%; border-collapse:collapse; font-size:13px; }
+      .tr-table thead th {
+        background:#F7FAFF; color:#5B6579; font-weight:400; padding:8px 12px;
+        text-align:left; white-space:nowrap; border-bottom:1px solid #D1DAEB;
+        position:sticky; top:0;
+      }
+      .tr-table thead th:first-child { font-weight:400; }
+      .tr-table tbody td {
+        padding:10px 12px; border-bottom:1px solid #D1DAEB; vertical-align:top;
+        color:#19202F;
+      }
+      .tr-table tbody tr:last-child td { border-bottom:none; }
+      .tr-task-cell { display:flex; align-items:center; gap:6px; white-space:nowrap; font-weight:500; }
+      .tr-task-link { color:var(--accent); cursor:pointer; text-decoration:none; font-weight:500; }
+      .tr-task-link:hover { text-decoration:underline; }
+      .tr-task-copy {
+        display:inline-flex; align-items:center; justify-content:center;
+        width:20px; height:20px; border:none; background:none;
+        color:var(--tertiary); cursor:pointer; border-radius:4px; font-size:11px;
+      }
+      .tr-task-copy:hover { background:#F0F0F0; color:var(--primary); }
+      .tr-badge-pass {
+        display:inline-flex; align-items:center; padding:2px 8px; border-radius:9999px;
+        font-size:12px; font-weight:500; color:#2A7E3B; background:rgba(42,126,59,0.08);
+      }
+      .tr-badge-fail {
+        display:inline-flex; align-items:center; padding:2px 8px; border-radius:9999px;
+        font-size:12px; font-weight:500; color:#D03500; background:rgba(208,53,0,0.08);
+      }
+      .tr-badge-sub { display:inline; font-size:11px; font-weight:400; color:#5B6579; margin-left:6px; }
+      .tr-loading {
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        padding:60px 20px; gap:16px; color:#5B6579; font-size:14px;
+      }
+      .tr-spinner {
+        width:32px; height:32px; border:3px solid #D1DAEB; border-top-color:var(--accent);
+        border-radius:50%; animation:spin 0.8s linear infinite;
+      }
+      @keyframes spin { to { transform:rotate(360deg); } }
+
+      .ttd-overlay {
+        position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:3000;
+        display:flex; justify-content:flex-end; opacity:0; pointer-events:none;
+        transition:opacity 0.2s;
+      }
+      .ttd-overlay.open { opacity:1; pointer-events:auto; }
+      .ttd-drawer {
+        width:560px; max-width:90vw; height:100vh; background:#fff;
+        box-shadow:-8px 0 24px rgba(0,0,0,0.12); display:flex; flex-direction:column;
+        transform:translateX(100%); transition:transform 0.25s ease;
+      }
+      .ttd-overlay.open .ttd-drawer { transform:translateX(0); }
+      .ttd-toolbar {
+        display:flex; align-items:center; gap:4px; padding:10px 16px;
+        border-bottom:1px solid var(--border); flex-shrink:0;
+      }
+      .ttd-toolbar-btn {
+        display:inline-flex; align-items:center; justify-content:center;
+        width:32px; height:32px; border:none; background:none;
+        color:var(--secondary); cursor:pointer; border-radius:9999px; font-size:14px;
+      }
+      .ttd-toolbar-btn:hover { background:#F0F0F0; }
+      .ttd-toolbar-divider { width:1px; height:20px; background:var(--border); margin:0 4px; }
+      .ttd-body { flex:1; overflow-y:auto; padding:20px 24px; }
+      .ttd-title { font-size:24px; font-weight:600; color:#19202F; margin-bottom:12px; }
+      .ttd-data-list { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+      .ttd-data-row { display:flex; gap:12px; font-size:14px; }
+      .ttd-data-label { color:#5B6579; min-width:60px; flex-shrink:0; }
+      .ttd-data-value { color:#19202F; word-break:break-word; }
+      .ttd-divider { height:1px; background:#D1DAEB; margin:0 0 16px; }
+      .ttd-tabs { display:flex; border-bottom:1px solid rgba(0, 50, 145, 0.18); gap:0; margin-bottom:16px; overflow-x:auto; }
+      .ttd-tab {
+        padding:8px 14px; font-size:14px; font-weight:400; color:#5B6579;
+        cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap;
+        background:none; border-top:none; border-left:none; border-right:none;
+        font-family:Inter,sans-serif;
+      }
+      .ttd-tab:hover { color:#19202F; }
+      .ttd-tab.active { color:#2E1E71; font-weight:600; border-bottom-color:#2E1E71; }
+      .ttd-tab-content { display:none; }
+      .ttd-tab-content.active { display:block; }
+      .ttd-try-section {
+        border:1px solid #C5CFE4; border-radius:8px; padding:12px;
+        display:flex; flex-direction:column; gap:16px; margin-bottom:12px;
+      }
+      .ttd-try-header {
+        display:flex; align-items:center; gap:4px;
+        font-size:16px; font-weight:600; color:#19202F;
+      }
+      .ttd-try-badge-fail {
+        display:inline-flex; align-items:center; padding:2px 6px; border-radius:9999px;
+        font-size:12px; font-weight:500; color:#D03500; background:#FFE2D7;
+      }
+      .ttd-try-badge-pass {
+        display:inline-flex; align-items:center; padding:2px 6px; border-radius:9999px;
+        font-size:12px; font-weight:500; color:#2A7E3B; background:#D6F1DF;
+      }
+      .ttd-section-label { font-size:14px; font-weight:600; color:#19202F; margin-bottom:2px; }
+      .ttd-response {
+        font-size:12px; color:#19202F; line-height:1.33;
+        max-height:100px; overflow:hidden; position:relative;
+      }
+      .ttd-response.expanded { max-height:none; }
+      .ttd-view-all {
+        font-size:12px; font-weight:600; color:#613EE0; cursor:pointer;
+        background:none; border:none; padding:0; font-family:Inter,sans-serif;
+        display:inline-block;
+      }
+      .ttd-view-all:hover { text-decoration:underline; }
+      .ttd-justification { font-size:12px; color:#19202F; line-height:1.33; }
+      .ttd-rubrics-row { display:flex; align-items:baseline; gap:4px; position:relative; }
+      .ttd-rubrics-label { font-size:14px; font-weight:600; color:#19202F; }
+      .ttd-rubrics-val { font-size:12px; font-weight:400; color:#5B6579; }
+      .ttd-rubrics-dots { display:flex; gap:4px; align-items:center; margin-left:4px; cursor:pointer; position:relative; }
+      .ttd-rubric-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+      .ttd-rubric-dot.pass { background:#46A758; }
+      .ttd-rubric-dot.fail { background:#FF5C00; }
+      .ttd-rubrics-tooltip {
+        display:none; position:absolute; bottom:calc(100% + 8px); left:0;
+        background:#19202F; color:#fff; border-radius:6px; padding:10px 12px;
+        font-size:11px; line-height:1.6; z-index:10; min-width:220px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.15); white-space:nowrap;
+      }
+      .ttd-rubrics-tooltip::after {
+        content:''; position:absolute; top:100%; left:16px;
+        border:5px solid transparent; border-top-color:#19202F;
+      }
+      .ttd-rubrics-dots:hover .ttd-rubrics-tooltip { display:block; }
+
+      .ttd-rubrics-grid {
+        display:flex; flex-wrap:wrap; gap:2px; margin-top:2px;
+      }
+      .ttd-rubric-sq-wrap { position:relative; display:flex; }
+      .ttd-rubric-sq {
+        width:14px; height:14px; border-radius:2px; flex-shrink:0; cursor:pointer;
+        display:block; transition: transform 0.1s, box-shadow 0.1s;
+      }
+      .ttd-rubric-sq:hover { transform:scale(1.3); box-shadow:0 0 0 2px rgba(0,0,0,0.15); }
+      .ttd-rubric-sq.pass { background:var(--success-icon,#46A758); }
+      .ttd-rubric-sq.fail { background:#EF4444; }
+      .ttd-rubric-sq-tip {
+        display:none; position:absolute; bottom:calc(100% + 8px); left:50%;
+        transform:translateX(-50%); background:var(--white,#fff); color:var(--primary,#19202F);
+        border:1px solid var(--border,#E2E8F0); border-radius:8px; padding:12px 14px;
+        font-size:14px; line-height:1.5; z-index:20; width:280px;
+        white-space:normal; box-shadow:0 4px 16px rgba(0,0,0,0.12); pointer-events:none;
+      }
+      .ttd-rubric-sq-tip::after {
+        content:''; position:absolute; top:100%; left:50%;
+        transform:translateX(-50%); border:6px solid transparent;
+        border-top-color:var(--border,#E2E8F0);
+      }
+      .ttd-rubric-sq-tip::before {
+        content:''; position:absolute; top:100%; left:50%;
+        transform:translateX(-50%); border:5px solid transparent;
+        border-top-color:var(--white,#fff); z-index:1; margin-top:-1px;
+      }
+      .ttd-rubric-sq-wrap:hover .ttd-rubric-sq-tip { display:block; }
+      .ttd-rubric-sq-tip-header {
+        display:flex; align-items:center; justify-content:space-between;
+      }
+      .ttd-rubric-sq-tip-id { font-weight:500; font-size:14px; }
+      .ttd-rubric-sq-tip-content { font-size:14px; color:var(--secondary,#5B6579); }
 
       .sum-d-ep-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
       .sum-d-ep-title { font-size:16px; font-weight:500; color:var(--primary); line-height:1.5; }
@@ -2466,14 +2776,17 @@
       .rpc-model-left { display:flex; align-items:flex-start; gap:8px; flex:1; min-width:0; }
       .rpc-model-icon { font-size:16px; flex-shrink:0; line-height:1.3; }
       .rpc-model-icon.check { color:var(--success-text); }
-      .rpc-model-icon.fail { color:#DC2626; }
+      .rpc-model-icon.fail { color:#FF5C00; }
       .rpc-model-icon.spinning { color:var(--tertiary); animation:rl-spin 1s linear infinite; }
       .rpc-model-name { font-size:14px; font-weight:500; color:var(--primary); }
       .rpc-model-count { font-size:14px; color:var(--secondary); font-variant-numeric:tabular-nums; white-space:nowrap; flex-shrink:0; }
       .rpc-model-error-wrap { display:flex; flex-direction:column; gap:2px; }
-      .rpc-model-error { font-size:12px; color:var(--secondary); margin-top:2px; }
-      .rpc-model-retry { background:none; border:none; color:var(--accent); font-size:12px; font-weight:600; cursor:pointer; padding:0; font-family:Inter,sans-serif; display:inline-flex; align-items:center; gap:4px; margin-top:2px; }
+      .rpc-model-error { font-size:12px; color:var(--secondary); margin-top:2px; display:flex; align-items:center; gap:4px; padding-left:24px; }
+      .rpc-model-retry { background:none; border:none; color:var(--accent); font-size:12px; font-weight:600; cursor:pointer; padding:0; font-family:Inter,sans-serif; display:inline-flex; align-items:center; gap:4px; flex-shrink:0; }
       .rpc-model-retry:hover { text-decoration:underline; }
+      .rpc-callout { display:flex; align-items:center; gap:4px; padding:8px 12px; background:#FFEBBA; border-radius:6px; margin-top:4px; }
+      .rpc-callout i { color:#946600; font-size:14px; flex-shrink:0; }
+      .rpc-callout-text { font-size:14px; color:#47391C; padding:2px 8px; }
       @keyframes rpc-pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
 
       /* ═══ Compact stats bar ═══ */
@@ -2500,167 +2813,145 @@
       .retry-row-text { font-size:11px; color:var(--secondary); white-space:nowrap; width:90px; text-align:right; flex-shrink:0; }
       .retry-row-action { flex-shrink:0; }
     
-      /* ═══ Run History timeline ═══ */
-      .rh-timeline { display:flex; flex-direction:column; gap:8px; }
+      /* ═══ Run History data table ═══ */
+      .rh-timeline { display:flex; flex-direction:column; gap:0; }
 
-      .rh-card {
+      .rh-table-wrap {
         border: 1px solid var(--border);
         border-radius: 8px;
         background: var(--white);
         overflow: hidden;
-        transition: border-color 0.15s;
       }
-      .rh-card:hover { border-color: var(--accent); }
-      .rh-card.rh-current { }
-
-      .rh-card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 16px 0;
-        gap: 8px;
+      .rh-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
       }
-      .rh-card-header-left {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .rh-card-timestamp {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--primary);
-      }
-
-      .rh-card-separator {
-        height: 1px;
-        background: var(--border);
-        margin: 10px 16px 0;
-      }
-
-      .rh-card-body {
-        padding: 10px 16px 14px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .rh-card-meta {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-        font-size: 12px;
-        color: var(--tertiary);
-      }
-      .rh-card-meta span {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-      .rh-card-meta .rh-meta-separator {
-        width: 3px;
-        height: 3px;
-        border-radius: 50%;
-        background: var(--border);
-        flex-shrink: 0;
-      }
-
-      .rh-copy-id-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
+      .rh-table thead th {
+        padding: 8px 12px;
         font-size: 12px;
         font-weight: 500;
         color: var(--secondary);
-        cursor: pointer;
-        border: none;
-        background: none;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-family: inherit;
-        transition: color 0.12s, background 0.12s;
+        text-align: left;
+        background: var(--table-header-bg);
+        border-bottom: 1px solid var(--border);
         white-space: nowrap;
-        flex-shrink: 0;
+        user-select: none;
       }
-      .rh-copy-id-btn:hover { color: var(--accent); background: var(--accent-bg); }
-      .rh-copy-id-btn i { font-size: 10px; }
+      .rh-table thead th.sortable { cursor:pointer; }
+      .rh-table thead th .sort-icon { font-size:10px; margin-left:4px; color:var(--tertiary); }
+      .rh-table tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.1s;
+        cursor: pointer;
+      }
+      .rh-table tbody tr:last-child { border-bottom: none; }
+      .rh-table tbody tr:hover { background: var(--bg); }
+      .rh-table tbody td {
+        padding: 10px 12px;
+        vertical-align: middle;
+        color: var(--primary);
+      }
 
-      .rh-models-toggle {
+      .rh-id-cell {
         display: flex;
         align-items: center;
         gap: 6px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 6px 8px;
-        margin: 0 -8px;
-        border-radius: 6px;
-        font-family: inherit;
+      }
+      .rh-id-cell-text { display:flex; flex-direction:column; gap:1px; min-width:0; }
+      .rh-id-link {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--accent);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .rh-id-link:hover { text-decoration: underline; }
+      .rh-id-sub {
         font-size: 12px;
-        font-weight: 500;
         color: var(--secondary);
-        transition: background 0.12s;
-        width: calc(100% + 16px);
-        text-align: left;
+        font-family: monospace;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 180px;
       }
-      .rh-models-toggle:hover { background: var(--bg); }
-      .rh-models-toggle i.chevron {
-        font-size: 9px;
+      .rh-copy-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border: none;
+        background: none;
         color: var(--tertiary);
-        transition: transform 0.2s;
-        margin-left: auto;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 11px;
+        flex-shrink: 0;
+        transition: color 0.12s, background 0.12s;
       }
-      .rh-models-toggle.open i.chevron { transform: rotate(180deg); }
+      .rh-copy-btn:hover { color: var(--accent); background: var(--accent-bg); }
 
-      .rh-models-summary-ok { color: var(--success-text); font-weight: 600; }
-      .rh-models-summary-fail { color: #DC2626; font-weight: 600; }
-      .rh-models-summary-warn { color: #946600; font-weight: 600; }
+      .rh-duration-cell { font-variant-numeric: tabular-nums; color: var(--secondary); }
+      .rh-tasks-cell { font-variant-numeric: tabular-nums; color: var(--secondary); }
+      .rh-runby-cell { color: var(--secondary); white-space: nowrap; overflow:hidden; text-overflow:ellipsis; max-width:200px; }
+      .rh-created-by { color:var(--secondary); font-size:14px; }
 
-      .rh-models-list {
-        display: none;
-        flex-direction: column;
-        gap: 0;
-        padding: 4px 0 0;
-      }
-      .rh-models-list.open { display: flex; }
-
-      .rh-model-row {
+      .rh-table-footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 8px;
-        padding: 5px 8px;
-        margin: 0 -8px;
-        border-radius: 4px;
-        font-size: 13px;
-      }
-      .rh-model-row:hover { background: var(--bg); }
-      .rh-model-name-group {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        min-width: 0;
-        flex: 1;
-      }
-      .rh-model-name {
-        font-weight: 500;
-        color: var(--primary);
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      .rh-model-count {
+        padding: 8px 12px;
+        border-top: 1px solid var(--border);
         font-size: 12px;
-        color: var(--tertiary);
-        font-variant-numeric: tabular-nums;
-        white-space: nowrap;
+        color: var(--secondary);
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .rh-pagination {
         display: flex;
         align-items: center;
-        gap: 4px;
-        flex-shrink: 0;
+        gap: 2px;
       }
-      .rh-model-count .fa-triangle-exclamation { color: #F1B100; font-size: 11px; }
+      .rh-page-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 28px;
+        height: 28px;
+        border: none;
+        background: none;
+        color: var(--secondary);
+        cursor: pointer;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-family: inherit;
+        padding: 0 4px;
+        transition: background 0.12s, color 0.12s;
+      }
+      .rh-page-btn:hover { background: var(--bg); }
+      .rh-page-btn.active {
+        background: var(--primary);
+        color: var(--white);
+        font-weight: 500;
+      }
+      .rh-page-btn:disabled { opacity:0.35; cursor:default; }
+      .rh-page-btn:disabled:hover { background:none; }
+      .rh-footer-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .rh-rows-select {
+        font-size: 12px;
+        font-family: inherit;
+        border: none;
+        background: none;
+        color: var(--secondary);
+        cursor: pointer;
+        padding: 2px 4px;
+      }
     </style>
     </head>
     <body>
@@ -2761,8 +3052,9 @@
                 <tr>
                   <th style="width:318px">Run ID <i class="fa-solid fa-sort sort-icon"></i></th>
                   <th>Status</th>
-                  <th>Response model</th>
-                  <th>Created</th>
+                  <th>Solver model</th>
+                  <th>Created time</th>
+                  <th>Created by</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -2776,10 +3068,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-completed">Completed</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             GPT-5.2, Gemini 3, Claude Opus, Llama 4, Mistral Large
           </td>
-          <td class="body-r" style="color:var(--secondary)">Mar 3, 2026 9:00 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">Mar 3, 2026 9:00 AM (PST)</td>
+          <td><span class="rh-created-by">Linh Hyunh</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2796,10 +3089,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-completed">Completed</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             GPT-5.2, GPT-5.2, GPT-5.2
           </td>
-          <td class="body-r" style="color:var(--secondary)">Jan 16, 2024 5:17 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">Jan 16, 2024 5:17 AM (PST)</td>
+          <td><span class="rh-created-by">Alex Chen</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2816,10 +3110,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-failed">Canceled</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             Llama 4
           </td>
-          <td class="body-r" style="color:var(--secondary)">Apr 11, 2024 7:42 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">Apr 11, 2024 7:42 AM (PST)</td>
+          <td><span class="rh-created-by">Maria Garcia</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2836,10 +3131,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-running"><span class="pulse"></span> Running</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             GPT-5.2
           </td>
-          <td class="body-r" style="color:var(--secondary)">May 23, 2024 7:28 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">May 23, 2024 7:28 AM (PST)</td>
+          <td><span class="rh-created-by">James Wu</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2856,10 +3152,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-running"><span class="pulse"></span> Running</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             Llama 4, Llama 4
           </td>
-          <td class="body-r" style="color:var(--secondary)">Sep 21, 2024 2:21 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">Sep 21, 2024 2:21 AM (PST)</td>
+          <td><span class="rh-created-by">Sarah Kim</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2876,10 +3173,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-completed">Completed</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             Mistral Large
           </td>
-          <td class="body-r" style="color:var(--secondary)">Sep 19, 2024 10:06 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">Sep 19, 2024 10:06 AM (PST)</td>
+          <td><span class="rh-created-by">Linh Hyunh</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2896,10 +3194,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-running"><span class="pulse"></span> Running</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             Gemini 3
           </td>
-          <td class="body-r" style="color:var(--secondary)">Aug 5, 2024 7:08 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">Aug 5, 2024 7:08 AM (PST)</td>
+          <td><span class="rh-created-by">Alex Chen</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2916,10 +3215,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-scheduled">Queued</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             Mistral Large, Gemini 3
           </td>
-          <td class="body-r" style="color:var(--secondary)">May 1, 2024 3:40 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">May 1, 2024 3:40 AM (PST)</td>
+          <td><span class="rh-created-by">Maria Garcia</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2936,10 +3236,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-completed">Completed</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             Mistral Large, Claude Opus, GPT-5.2
           </td>
-          <td class="body-r" style="color:var(--secondary)">Dec 11, 2024 2:33 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">Dec 11, 2024 2:33 AM (PST)</td>
+          <td><span class="rh-created-by">James Wu</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -2956,10 +3257,11 @@
             </div>
           </td>
           <td><span class="badge-status badge-completed">Completed</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td style="color:var(--primary);font-size:14px">
             GPT-5.2
           </td>
-          <td class="body-r" style="color:var(--secondary)">Jul 15, 2024 3:34 AM (PST)</td>
+          <td class="body-r" style="color:var(--primary)">Jul 15, 2024 3:34 AM (PST)</td>
+          <td><span class="rh-created-by">Sarah Kim</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -3062,6 +3364,15 @@
                 <div class="wiz-panel" id="wizPanel2">
                   <h3 class="wiz-section-title">Solver models</h3>
                   <p class="wiz-section-desc">Models that generate responses for each task prompt.</p>
+                  <div class="wiz-preset-row" id="wizPresetRow">
+                    <span class="wiz-preset-label">Quick add:</span>
+                    <button class="wiz-preset-badge" onclick="addPresetSolver('OpenAI','gpt-4o',5)">gpt-4o · K=5</button>
+                    <button class="wiz-preset-badge" onclick="addPresetSolver('OpenAI','gpt-4o-mini',5)">gpt-4o-mini · K=5</button>
+                    <button class="wiz-preset-badge" onclick="addPresetSolver('Anthropic','claude-4-sonnet',5)">claude-4-sonnet · K=5</button>
+                    <button class="wiz-preset-badge" onclick="addPresetSolver('Google','gemini-2.5-pro',5)">gemini-2.5-pro · K=5</button>
+                    <button class="wiz-preset-badge" onclick="addPresetSolver('Google','gemini-2.5-flash',10)">gemini-2.5-flash · K=10</button>
+                    <button class="wiz-preset-badge" onclick="addPresetSolver('Meta','llama-4-maverick',5)">llama-4-maverick · K=5</button>
+                  </div>
                   <div id="wizSolverCards">
         <div class="wiz-model-card">
           <div class="wiz-mc-header">
@@ -3167,9 +3478,6 @@
               <div class="wiz-mc-field"><label>Temperature</label><input type="number" value="0" step="0.1"></div>
             </div>
           </div>
-          <div class="wiz-mc-kv-row" style="margin-top:8px">
-            <div class="wiz-mc-field"><label>K-value</label><input type="number" value="5"></div>
-          </div>
         </div></div>
                   <div style="margin-top:16px">
                     <div style="display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none" onclick="var body=document.getElementById('judgePromptCollapse');var chev=document.getElementById('judgePromptChevron');if(body.style.maxHeight==='0px'){body.style.maxHeight=body.scrollHeight+'px';chev.style.transform='rotate(180deg)'}else{body.style.maxHeight='0px';chev.style.transform='rotate(0deg)'}">
@@ -3260,17 +3568,38 @@ Do not include any other text before or after the JSON object</textarea>
     
                 <!-- ──── STEP 5: Summary ──── -->
                 <div class="wiz-panel active" id="wizPanel5">
-                  <h3 class="wiz-section-title">Summary</h3>
-                  <p class="wiz-section-desc">Review your configuration before launching the run.</p>
-    
-                  <div id="sumLayoutContainer">
-                    <!-- Rendered by switchSumVariant / populateSummary -->
+                  <div id="sumContent">
+                    <h3 class="wiz-section-title">Summary</h3>
+                    <p class="wiz-section-desc">Review your configuration before launching the run.</p>
+
+                    <div id="sumLayoutContainer">
+                      <!-- Rendered by switchSumVariant / populateSummary -->
+                    </div>
+
+                    <div class="wiz-divider"></div>
+                    <div class="wiz-footer">
+                      <button class="wiz-btn-outline" onclick="wizGoTo(4)"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                      <div style="display:flex;gap:12px;align-items:center">
+                        <button class="wiz-btn-outline" id="sumTestRunBtn" onclick="launchTestRun()">Test run</button>
+                        <button class="wiz-btn-solid wiz-btn-run-passk" id="sumRunBtn" onclick="launchRun(document.getElementById('wizRunName').value||'New Run')"><i class="fa-solid fa-play"></i> Run Pass@K</button>
+                      </div>
+                    </div>
                   </div>
-    
-                  <div class="wiz-divider"></div>
-                  <div class="wiz-footer">
-                    <button class="wiz-btn-outline" onclick="wizGoTo(4)"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                    <button class="wiz-btn-solid wiz-btn-run-passk" id="sumRunBtn" onclick="launchRun(document.getElementById('wizRunName').value||'New Run')"><i class="fa-solid fa-play"></i> Run Pass@K</button>
+
+                  <div class="tr-view" id="testRunView">
+                    <button class="tr-back-btn" onclick="hideTestRunResults()"><i class="fa-solid fa-arrow-left"></i> Back to Summary</button>
+                    <div class="tr-title">Test run results</div>
+                    <div class="tr-table-wrap">
+                      <table class="tr-table">
+                        <thead id="trHead"></thead>
+                        <tbody id="trBody"></tbody>
+                      </table>
+                    </div>
+                    <div class="wiz-divider"></div>
+                    <div class="wiz-footer">
+                      <button class="wiz-btn-outline" onclick="hideTestRunResults()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                      <button class="wiz-btn-solid wiz-btn-run-passk" onclick="launchRun(document.getElementById('wizRunName').value||'New Run')"><i class="fa-solid fa-play"></i> Run Pass@K</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -3326,7 +3655,7 @@ Do not include any other text before or after the JSON object</textarea>
               <h3 style="font-size:18px;font-weight:500">Supported Endpoints</h3>
               <button class="wiz-modal-close" onclick="closeEndpointModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <p class="wiz-modal-subtitle">Need to add a new endpoint? Reach out to <strong>#genai-chat-task-eng</strong></p>
+            <p class="wiz-modal-subtitle" id="endpointModalSubtitle">Need to add a new endpoint? Reach out to <strong>#genai-chat-task-eng</strong></p>
             <div style="padding:0 24px 12px">
               <input class="wiz-input" id="endpointSearchInput" placeholder="Search for an endpoint" oninput="filterEndpoints()">
             </div>
@@ -3382,22 +3711,19 @@ Do not include any other text before or after the JSON object</textarea>
               <div class="rdh-title-group">
                 <div class="rdh-title-badges">
                   <h2 class="h4-sb" id="detailTitle">Weekly Eval</h2>
+                  <span class="rdh-tag-badge" id="detailTag">Ad-hoc</span>
                   <span class="badge-status badge-completed" id="detailBadge">Completed</span>
                 </div>
-                <span class="rdh-tag-badge" id="detailTag">Ad-hoc</span>
               </div>
               <div class="rdh-actions" id="detailActions">
-                <button class="rdh-duplicate-btn" onclick="duplicateRun()">Duplicate and edit</button>
+                <button class="rdh-duplicate-btn" onclick="duplicateRun()">Duplicate</button>
                 <button class="btn-danger" id="cancelBtn" onclick="cancelRun()" style="display: none;"><i class="fa-solid fa-stop"></i> Cancel</button>
               </div>
             </div>
             <div class="rdh-meta">
               <span class="rdh-meta-text" id="detailCreated">Created by user on Mar 3, 2026 at 9:00 AM</span>
-              <div class="rdh-run-id-row">
-                <span class="rdh-meta-text">Run ID: <span id="detailId">67bfae2325e3adfab47b3147</span></span>
-                <button class="rdh-copy-btn" onclick="copyRunId()"><i class="fa-regular fa-copy"></i> Run ID</button>
-                <span class="rdh-meta-text" id="detailDuration" style="display:none"></span>
-              </div>
+              <span class="rdh-meta-text" id="detailDuration" style="display:none"></span>
+              <span id="detailId" style="display:none">67bfae2325e3adfab47b3147</span>
             </div>
           </div>
     
@@ -3429,6 +3755,10 @@ Do not include any other text before or after the JSON object</textarea>
               </div>
               <div class="rpc-divider"></div>
               <div class="rpc-models" id="rpcModels"></div>
+              <div class="rpc-callout" id="rpcCallout" style="display:none">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span class="rpc-callout-text" id="rpcCalloutText"></span>
+              </div>
             </div>
 
             <!-- Sticky retry banner (hidden by default) -->
@@ -3634,7 +3964,24 @@ Do not include any other text before or after the JSON object</textarea>
     
           <!-- ── Run History Panel ── -->
           <div class="detail-panel" id="dp-history">
-            <div class="rh-timeline" id="rhTimeline"></div>
+            <div class="rh-timeline" id="rhTimeline">
+              <div class="rh-table-wrap">
+                <table class="rh-table">
+                  <thead>
+                    <tr>
+                      <th class="sortable" onclick="sortRunHistory('runId')">Run ID <i class="fa-solid fa-arrow-up-arrow-down sort-icon"></i></th>
+                      <th>Status</th>
+                      <th>Models</th>
+                      <th>Duration</th>
+                      <th>Tasks per model</th>
+                      <th>Created by</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rhTableBody"></tbody>
+                </table>
+                <div class="rh-table-footer" id="rhTableFooter"></div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -3664,6 +4011,13 @@ Do not include any other text before or after the JSON object</textarea>
              d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) + ' (PST)';
     }
     
+    const creatorPool = [
+      {name:'Linh Hyunh', initials:'LH'},
+      {name:'Alex Chen', initials:'AC'},
+      {name:'Maria Garcia', initials:'MG'},
+      {name:'James Wu', initials:'JW'},
+      {name:'Sarah Kim', initials:'SK'}
+    ];
     const pinnedRun = {
       name: 'Weekly Eval',
       id: '67bfae2325e3adfab47b3147',
@@ -3672,6 +4026,7 @@ Do not include any other text before or after the JSON object</textarea>
       models: ['GPT-5.2', 'Gemini 3', 'Claude Opus', 'Llama 4', 'Mistral Large'],
       created: 'Mar 3, 2026 9:00 AM (PST)',
       tasks: 200,
+      createdBy: creatorPool[0],
     };
     const runs = [pinnedRun, ...Array.from({ length: 35 }, () => ({
       name: runNames[Math.floor(Math.random()*runNames.length)],
@@ -3680,6 +4035,7 @@ Do not include any other text before or after the JSON object</textarea>
       status: statuses[Math.floor(Math.random()*statuses.length)],
       models: Array.from({ length: Math.floor(Math.random()*3)+1 }, () => models[Math.floor(Math.random()*models.length)]),
       created: randomDate(),
+      createdBy: creatorPool[Math.floor(Math.random()*creatorPool.length)],
     }))];
     
     function renderRuns() {
@@ -3693,11 +4049,12 @@ Do not include any other text before or after the JSON object</textarea>
               <span class="badge-neutral">${r.tag}</span>
             </div>
           </td>
-          <td><span class="badge-status badge-${r.status === 'Completed' ? 'completed' : r.status === 'Running' ? 'running' : r.status === 'Failed' ? 'failed' : r.status === 'Canceled' ? 'canceled' : 'scheduled'}">${r.status === 'Running' ? '<span class="pulse"></span> ' : ''}${r.status}</span></td>
-          <td style="color:var(--secondary);font-size:13px">
+          <td><span class="badge-status badge-${r.status === 'Completed' ? 'completed' : r.status === 'Running' ? 'running' : r.status === 'Failed' ? 'warning' : r.status === 'Canceled' ? 'canceled' : 'scheduled'}">${r.status === 'Running' ? '<span class="pulse"></span> ' : ''}${r.status === 'Failed' ? 'Partially successful' : r.status}</span></td>
+          <td style="color:var(--primary);font-size:14px">
             ${r.models.join(', ')}
           </td>
-          <td class="body-r" style="color:var(--secondary)">${r.created}</td>
+          <td class="body-r" style="color:var(--primary)">${r.created}</td>
+          <td><span class="rh-created-by">${r.createdBy ? r.createdBy.name : '—'}</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-sm" onclick="showPage('setup')">Duplicate</button>
@@ -3894,7 +4251,7 @@ Do not include any other text before or after the JSON object</textarea>
     
     function launchRun(runName) {
       _runSaved = false;
-      runHistory = [];
+      runHistory = []; rhPage = 1;
       rlRunName = runName || 'New Run';
       showPage('detail');
       const tabs = document.querySelectorAll('#page-detail .detail-tab');
@@ -3917,7 +4274,7 @@ Do not include any other text before or after the JSON object</textarea>
     
       if (rlModels.length === 0) {
         rlModels = [
-          { name: 'LiteLLMStrategy', url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 1000, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.6 }
+          { name: 'No model selected', url: 'https://hyperplant.io.naver.com/v1/proxy/call_llm', k: 3, runId: randomId(), tasks: 1000, done: 0, pct: 0, status: 'running', attempt: 1, startTime: new Date(), error: null, speed: 0.6 }
         ];
       }
     
@@ -3927,6 +4284,7 @@ Do not include any other text before or after the JSON object</textarea>
       document.getElementById('detailId').textContent = rlModels[0]?.runId || randomId();
       document.getElementById('detailCreated').textContent = 'Created on ' + new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
       document.getElementById('detailTag').textContent = 'Ad-hoc';
+      activeRunTag = 'Ad-hoc';
 
       var detBadge = document.getElementById('detailBadge');
       if (detBadge) { detBadge.className = 'badge-status badge-running'; detBadge.innerHTML = '<span class="pulse"></span> Running'; }
@@ -3943,6 +4301,9 @@ Do not include any other text before or after the JSON object</textarea>
       var resOrig = document.getElementById('res-original');
       if (resOrig) resOrig.style.display = 'none';
 
+      var errorBanner = document.getElementById('errorBanner');
+      if (errorBanner) errorBanner.style.display = 'none';
+
       renderRunProgressCard();
 
       clearInterval(rlInterval);
@@ -3958,7 +4319,246 @@ Do not include any other text before or after the JSON object</textarea>
 
       rlInterval = setInterval(tickLoading, 300);
     }
-    
+
+    function launchTestRun() {
+      syncSolverCardsFromDOM();
+      var models = wizSolverModels.map(function(m) { return m.model || m.strategy || 'Model'; });
+      if (models.length === 0) models = ['No model selected'];
+      var testTaskCount = 5;
+
+      document.getElementById('sumContent').style.display = 'none';
+      var trView = document.getElementById('testRunView');
+      trView.classList.add('active');
+
+      var thead = document.getElementById('trHead');
+      var tbody = document.getElementById('trBody');
+      thead.innerHTML = '';
+      tbody.innerHTML = '<tr><td colspan="' + (models.length + 1) + '"><div class="tr-loading"><div class="tr-spinner"></div>Running test with ' + testTaskCount + ' tasks across ' + models.length + ' model' + (models.length > 1 ? 's' : '') + '...</div></td></tr>';
+
+      setTimeout(function() {
+        var headerHtml = '<tr><th>Model <i class="fa-solid fa-arrow-up-arrow-down" style="font-size:10px;margin-left:4px;color:var(--tertiary)"></i></th>';
+        models.forEach(function(m) { headerHtml += '<th>' + m + '</th>'; });
+        headerHtml += '</tr>';
+        thead.innerHTML = headerHtml;
+
+        var rowsHtml = '';
+        for (var t = 1; t <= testTaskCount; t++) {
+          var taskId = randomId().substring(0, 12);
+          rowsHtml += '<tr>';
+          rowsHtml += '<td><div class="tr-task-cell"><a class="tr-task-link" href="javascript:void(0)" onclick="openTestTaskDrawer(' + t + ',\'' + taskId + '\')">Task ' + t + '</a> <button class="tr-task-copy" onclick="event.stopPropagation();copyToClip(\'' + taskId + '\')" title="Copy task ID"><i class="fa-regular fa-copy"></i></button></div></td>';
+          models.forEach(function(m, mi) {
+            var passed = Math.random() > 0.35;
+            var kVal = wizSolverModels[mi] ? wizSolverModels[mi].kValue : 5;
+            var tries = Math.floor(Math.random() * (kVal - 1)) + 1;
+            if (passed) {
+              rowsHtml += '<td><span class="tr-badge-pass">Passed</span><span class="tr-badge-sub">' + tries + '/' + kVal + ' responses</span></td>';
+            } else {
+              rowsHtml += '<td><span class="tr-badge-fail">Failed</span><span class="tr-badge-sub">0/' + kVal + ' responses</span></td>';
+            }
+          });
+          rowsHtml += '</tr>';
+        }
+        tbody.innerHTML = rowsHtml;
+      }, 1800);
+    }
+
+    function hideTestRunResults() {
+      document.getElementById('testRunView').classList.remove('active');
+      document.getElementById('sumContent').style.display = '';
+    }
+
+    var ttdCurrentTask = 1;
+    var ttdTotalTasks = 5;
+    var ttdTaskData = {};
+
+    var samplePrompts = [
+      'Three tips to help my daughter get a clean sweep next week',
+      'Explain quantum computing to a 10-year-old in simple terms',
+      'Write a professional email declining a meeting invitation',
+      'Compare the pros and cons of remote work vs office work',
+      'Suggest a weekly meal plan for a vegetarian family of four'
+    ];
+
+    var sampleResponses = [
+      '1) **Make a simple, specific plan (and stick to it)**\n- Pick the exact things she needs to nail next week (topics, routines, events).\n- Do **short daily practice blocks** (25\u201345 min) focused on weak spots first.\n- Finish each session with **1 "test run"** (past paper, mock round, timed drill) so she\u2019s practicing under pressure.\n\n2) **Protect sleep + energy like it\u2019s part of training**\n- Aim for **8\u201310 hours sleep** and a consistent bedtime all week.\n- Light exercise + hydration + balanced meals; avoid last-minute drastic changes.\n- Use a quick pre-performance routine: 2\u20133 deep breaths + a positive cue word.\n\n3) **Build confidence with small wins**\n- End each day by writing down 2 things that went well.\n- Remind her: preparation beats perfection.\n- On the day itself: start with the easiest section to build momentum.',
+      'Imagine you have a huge maze with millions of paths. A regular computer tries each path one at a time. A quantum computer can explore many paths at the same time! It uses special "quantum bits" (called qubits) that can be both 0 and 1 simultaneously \u2014 this is called superposition.\n\nThink of it like reading a book: a regular computer reads page by page, but a quantum computer can read all pages at once. This makes it incredibly fast for certain problems like breaking codes, simulating molecules, or searching huge databases.\n\nHowever, quantum computers are very fragile \u2014 they need to be kept extremely cold (colder than outer space!) and any tiny disturbance can cause errors. We\u2019re still figuring out how to make them reliable enough for everyday use.',
+      'Dear [Name],\n\nThank you for the meeting invitation for [date/time]. Unfortunately, I have a prior commitment that conflicts with this time slot and won\u2019t be able to attend.\n\nI\u2019d appreciate it if you could share the meeting notes or recording afterward so I can stay up to date on any decisions or action items. If there are specific topics where my input would be helpful, I\u2019m happy to share my thoughts asynchronously beforehand.\n\nPlease don\u2019t hesitate to reach out if you\u2019d like to schedule a separate 1:1 to discuss any items that need my direct involvement.\n\nBest regards,\n[Your Name]',
+      'Remote work offers flexibility, eliminates commuting, and can improve work-life balance. Many employees report higher productivity and satisfaction when working from home. It also opens up access to a global talent pool.\n\nHowever, office work provides stronger face-to-face collaboration, clearer work-life boundaries, and valuable social interaction. Spontaneous conversations often lead to creative problem-solving that\u2019s harder to replicate virtually.\n\nThe best approach often depends on role requirements, team dynamics, and individual preferences. Many companies are adopting hybrid models that combine the benefits of both, typically 2\u20133 days in office and the rest remote.',
+      'Monday: Vegetable stir-fry with tofu, bell peppers, broccoli, and brown rice\nTuesday: Lentil soup with crusty sourdough bread and a side salad\nWednesday: Caprese pasta with cherry tomatoes, fresh mozzarella, and basil pesto\nThursday: Black bean tacos with avocado, pickled onions, and lime crema\nFriday: Mushroom risotto with parmesan and roasted asparagus\nSaturday: Homemade margherita pizza with arugula salad\nSunday: Chickpea curry with coconut milk, spinach, and naan bread\n\nSnack ideas: hummus with veggies, trail mix, Greek yogurt with granola, apple slices with almond butter'
+    ];
+
+    function generateTestTaskData() {
+      ttdTaskData = {};
+      syncSolverCardsFromDOM();
+      var models = wizSolverModels.map(function(m) { return m.model || m.strategy || 'Model'; });
+      if (models.length === 0) models = ['No model selected'];
+
+      for (var t = 1; t <= ttdTotalTasks; t++) {
+        var taskModels = {};
+        models.forEach(function(m, mi) {
+          var kVal = wizSolverModels[mi] ? wizSolverModels[mi].kValue : 5;
+          var tries = [];
+          var passed = Math.random() > 0.35;
+          var passCount = passed ? Math.floor(Math.random() * (kVal - 1)) + 1 : 0;
+          for (var k = 0; k < kVal; k++) {
+            var tryPassed = k < passCount ? false : (k === passCount && passed);
+            var rubricTotal = Math.floor(Math.random() * 21) + 20;
+            var rubricPassed = tryPassed ? Math.floor(rubricTotal * 0.6) + Math.floor(Math.random() * Math.floor(rubricTotal * 0.3)) : Math.floor(Math.random() * Math.floor(rubricTotal * 0.4)) + 1;
+            var rubricDescs = [
+              'Response is factually accurate',
+              'Answer addresses the core question',
+              'No hallucinated information',
+              'Proper grammar and spelling',
+              'Response is concise and clear',
+              'Follows the specified format',
+              'Includes relevant examples',
+              'Tone is appropriate for audience',
+              'No contradictions in response',
+              'Cites sources when applicable',
+              'Covers all sub-questions',
+              'Avoids unnecessary repetition',
+              'Uses domain-specific terminology',
+              'Reasoning is logically sound',
+              'Handles edge cases properly',
+              'Does not include harmful content',
+              'Respects cultural sensitivities',
+              'Provides actionable next steps',
+              'Maintains consistent perspective',
+              'Demonstrates subject expertise',
+              'Appropriate level of detail',
+              'Balances pros and cons fairly',
+              'Identifies assumptions clearly',
+              'Uses evidence-based arguments',
+              'Acknowledges limitations',
+              'Structured with clear sections',
+              'Avoids jargon when unnecessary',
+              'Responds within token budget',
+              'Aligns with brand voice guidelines',
+              'No PII or sensitive data leaked',
+              'Contains a clear summary',
+              'Supports claims with data',
+              'Handles ambiguity gracefully',
+              'Provides alternative viewpoints',
+              'Maintains neutrality where needed',
+              'Uses correct units and formats',
+              'Addresses counterarguments',
+              'Follows ethical guidelines',
+              'Readable by target audience',
+              'Contains no copyrighted content'
+            ];
+            var passJustifications = [
+              'The response correctly addresses this criterion with sufficient detail.',
+              'All requirements for this rubric are met in the output.',
+              'The model output satisfies the expected behavior described by this rubric.',
+              'Content aligns well with the rubric expectations.',
+              'This criterion is fully satisfied by the response.'
+            ];
+            var failJustifications = [
+              'The response does not meet this criterion — key elements are missing.',
+              'Output lacks the required structure or content for this rubric.',
+              'The model failed to address the specific requirement outlined here.',
+              'Response partially addresses this but falls short of the threshold.',
+              'This criterion is not satisfied — the output contradicts expectations.'
+            ];
+            var rubrics = [];
+            for (var r = 0; r < rubricTotal; r++) {
+              var rbPassed = r < rubricPassed;
+              rubrics.push({
+                id: 'RB-' + randomId().substring(0, 6).toUpperCase(),
+                content: rubricDescs[r % rubricDescs.length],
+                passed: rbPassed,
+                justification: rbPassed ? passJustifications[r % passJustifications.length] : failJustifications[r % failJustifications.length]
+              });
+            }
+            tries.push({
+              passed: k < passCount || (k >= passCount && passed && Math.random() > 0.4),
+              rubricPassed: rubricPassed,
+              rubricTotal: rubricTotal,
+              rubrics: rubrics,
+              response: sampleResponses[(t + mi + k) % sampleResponses.length]
+            });
+          }
+          taskModels[m] = { tries: tries, passed: passed, passCount: passCount, kVal: kVal };
+        });
+        ttdTaskData[t] = { taskId: randomId().substring(0, 24), prompt: samplePrompts[(t - 1) % samplePrompts.length], models: taskModels };
+      }
+    }
+
+    function openTestTaskDrawer(taskNum, taskId) {
+      if (!ttdTaskData[taskNum]) generateTestTaskData();
+      ttdCurrentTask = taskNum;
+      var data = ttdTaskData[taskNum];
+      var overlay = document.getElementById('ttdOverlay');
+
+      document.getElementById('ttdTitle').textContent = 'Task ' + taskNum;
+      document.getElementById('ttdDataList').innerHTML =
+        '<div class="ttd-data-row"><span class="ttd-data-label">Task ID</span><span class="ttd-data-value" style="font-family:monospace">' + (taskId || data.taskId) + '</span></div>' +
+        '<div class="ttd-data-row"><span class="ttd-data-label">Prompt</span><span class="ttd-data-value">' + data.prompt + '</span></div>';
+
+      var modelNames = Object.keys(data.models);
+      var tabsHtml = '';
+      modelNames.forEach(function(m, i) {
+        tabsHtml += '<button class="ttd-tab' + (i === 0 ? ' active' : '') + '" onclick="switchTestTaskTab(' + i + ',this)">' + m + '</button>';
+      });
+      document.getElementById('ttdTabs').innerHTML = tabsHtml;
+
+      renderTestTaskTabContent(data, modelNames, 0);
+      overlay.classList.add('open');
+    }
+
+    function renderTestTaskTabContent(data, modelNames, idx) {
+      var m = modelNames[idx];
+      var md = data.models[m];
+      var html = '';
+
+      md.tries.forEach(function(tryData, ti) {
+        var badgeClass = tryData.passed ? 'ttd-try-badge-pass' : 'ttd-try-badge-fail';
+        var badgeText = tryData.passed ? 'Passed' : 'Failed';
+
+        html += '<div class="ttd-try-section">';
+        html += '<div class="ttd-try-header">Response ' + (ti + 1) + ' <span class="' + badgeClass + '">' + badgeText + '</span></div>';
+        html += '<div><div class="ttd-section-label">Response</div>';
+        html += '<div class="ttd-response" id="ttdResp' + ti + '">' + tryData.response.replace(/\n/g, '<br>') + '</div>';
+        html += '<button class="ttd-view-all" onclick="var r=document.getElementById(\'ttdResp' + ti + '\');r.classList.toggle(\'expanded\');this.textContent=r.classList.contains(\'expanded\')?\'Show less\':\'View all\'">View all</button></div>';
+        html += '<div><div class="ttd-section-label">Rubrics <span style="font-weight:400;color:#5B6579;font-size:12px">' + tryData.rubricPassed + '/' + tryData.rubricTotal + ' passed</span></div>';
+        if (tryData.rubrics) {
+          html += '<div class="ttd-rubrics-grid">';
+          tryData.rubrics.forEach(function(rb) {
+            var statusColor = rb.passed ? '#2A7E3B' : '#D03500';
+            var statusText = rb.passed ? 'Passed' : 'Failed';
+            var badgeBg = rb.passed ? '#D6F1DF' : '#FFE2D7';
+            html += '<span class="ttd-rubric-sq-wrap"><span class="ttd-rubric-sq ' + (rb.passed ? 'pass' : 'fail') + '"></span>';
+            var badgeCss = rb.passed ? 'background:rgba(34,197,94,0.12);color:var(--success-text,#16A34A)' : 'background:rgba(239,68,68,0.1);color:#DC2626';
+            html += '<span class="ttd-rubric-sq-tip"><div class="ttd-rubric-sq-tip-header"><span class="ttd-rubric-sq-tip-id">' + rb.id + '</span><span style="padding:1px 8px;border-radius:9999px;font-size:12px;font-weight:500;' + badgeCss + '">' + statusText + '</span></div><div class="ttd-rubric-sq-tip-content" style="margin-top:2px;">' + (rb.content || '') + '</div><div style="border-top:1px solid var(--border,#E2E8F0);margin-top:8px;padding-top:8px;"><div style="font-weight:500;font-size:14px;color:var(--primary,#19202F);margin-bottom:2px;">Justification</div><div style="font-size:14px;color:var(--secondary,#5B6579);line-height:1.4;">' + (rb.justification || '') + '</div></div></span></span>';
+          });
+          html += '</div>';
+        }
+        html += '</div>';
+        html += '</div>';
+      });
+
+      document.getElementById('ttdTabContent').innerHTML = html;
+    }
+
+    function switchTestTaskTab(idx, btn) {
+      document.querySelectorAll('.ttd-tab').forEach(function(t) { t.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+      var data = ttdTaskData[ttdCurrentTask];
+      var modelNames = Object.keys(data.models);
+      renderTestTaskTabContent(data, modelNames, idx);
+    }
+
+    function closeTestTaskDrawer() {
+      document.getElementById('ttdOverlay').classList.remove('open');
+    }
+
+    function navTestTask(dir) {
+      var next = ttdCurrentTask + dir;
+      if (next < 1 || next > ttdTotalTasks) return;
+      var data = ttdTaskData[next];
+      if (data) openTestTaskDrawer(next, data.taskId);
+    }
+
     function renderLoadingCards() {
       const container = document.getElementById('rlCards');
       container.innerHTML = rlModels.map((m, i) => {
@@ -4122,10 +4722,13 @@ Do not include any other text before or after the JSON object</textarea>
       if (allDone) fillEl.classList.add('done');
       else fillEl.classList.remove('done');
 
+      var doneCount = rlModels.filter(function(m) { return m.status === 'done'; }).length;
+      var failCount = rlModels.filter(function(m) { return m.status === 'failed'; }).length;
+      var allFinished = doneCount + failCount === rlModels.length;
+
       modelsEl.innerHTML = rlModels.map(function(m, idx) {
         var isDone = m.status === 'done';
         var isFail = m.status === 'failed';
-        var isRunning = m.status === 'running';
         var iconClass = isDone ? 'check' : isFail ? 'fail' : 'spinning';
         var iconHtml = isDone
           ? '<i class="fa-regular fa-circle-check"></i>'
@@ -4136,8 +4739,9 @@ Do not include any other text before or after the JSON object</textarea>
         var errorHtml = '';
         if (isFail && m.error) {
           var errMsg = m.error.replace(/^HTTP \d+ . /, '');
-          errorHtml = '<div class="rpc-model-error">' + errMsg + '</div>'
-            + '<button class="rpc-model-retry" onclick="retryRunProgressModel(' + idx + ')"><i class="fa-solid fa-rotate-right" style="font-size:10px"></i> Retry</button>';
+          errorHtml = '<div class="rpc-model-error">' + errMsg
+            + ' <button class="rpc-model-retry" onclick="retryRunProgressModel(' + idx + ')"><i class="fa-solid fa-rotate-right" style="font-size:10px"></i> Retry</button>'
+            + '</div>';
         }
 
         var nameContent = errorHtml
@@ -4152,6 +4756,17 @@ Do not include any other text before or after the JSON object</textarea>
           + '<span class="rpc-model-count">' + m.done.toLocaleString() + ' / ' + m.tasks.toLocaleString() + '</span>'
           + '</div>';
       }).join('');
+
+      var callout = document.getElementById('rpcCallout');
+      if (callout) {
+        if (failCount > 0 && allFinished) {
+          callout.style.display = 'flex';
+          document.getElementById('rpcCalloutText').textContent =
+            'Only ' + doneCount + ' of ' + rlModels.length + ' models have successfully evaluated all tasks. Results below are based on completed tasks.';
+        } else {
+          callout.style.display = 'none';
+        }
+      }
     }
 
     function transitionToFullResults() {
@@ -4182,27 +4797,22 @@ Do not include any other text before or after the JSON object</textarea>
     }
 
     function transitionToPartialResults() {
-      hideAllLoadingOverlays();
-
-      var resOrig = document.getElementById('res-original');
-      if (resOrig) resOrig.style.display = '';
-
-      activeRunModels = rlModels.map(function(m) { return m.name; });
-      activeRunTasks = rlModels[0]?.tasks || 200;
-      rebuildModelCards();
-      rebuildResults();
-
-      setRunState('completed');
-
       var detBadge = document.getElementById('detailBadge');
       if (detBadge) { detBadge.className = 'badge-status badge-warning'; detBadge.innerHTML = 'Partially successful'; }
 
       var errorBanner = document.getElementById('errorBanner');
       if (errorBanner) errorBanner.style.display = 'none';
 
+      var resOrig = document.getElementById('res-original');
+      if (resOrig) resOrig.style.display = '';
+
+      renderRunProgressCard();
+
+      activeRunModels = rlModels.map(function(m) { return m.name; });
+      activeRunTasks = rlModels[0]?.tasks || 200;
+      rebuildModelCards();
+      rebuildResults();
       renderAllResults();
-      var tabs = document.querySelectorAll('#page-detail .detail-tab');
-      switchDetailTab('dp-results', tabs[0]);
     }
 
     function retryRunProgressModel(idx) {
@@ -4409,7 +5019,7 @@ Do not include any other text before or after the JSON object</textarea>
         name: rlRunName,
         id: rlModels[0]?.runId || randomId(),
         tag: 'Ad-hoc',
-        status: failed ? 'Canceled' : 'Completed',
+        status: failed ? 'Failed' : 'Completed',
         models: modelNames,
         created: createdStr,
         tasks: tasks,
@@ -4417,25 +5027,27 @@ Do not include any other text before or after the JSON object</textarea>
       renderRuns();
 
       const runId = rlModels[0]?.runId || randomId();
-      const modelResults = rlModels.map(m => ({
-        name: m.name,
-        status: m.status === 'done' ? 'Completed' : 'Failed',
-        done: m.done,
-        tasks: m.tasks,
-        error: m.error || null,
-        taskId: m.runId || randomId()
-      }));
 
       addRunHistoryEntry({
         name: rlRunName,
-        time: createdStr,
-        status: failed ? 'Failed' : 'Completed',
-        taskCount: tasks.toLocaleString(),
+        time: createdStr + ' (PST)',
+        status: failed ? 'Partially completed' : 'Completed',
+        tasksPerModel: tasks,
         duration: elapsed,
-        models: modelNames,
-        modelResults: modelResults,
-        judgeName: wizJudgeModel ? (wizJudgeModel.model || wizJudgeModel.strategy) : '—',
+        runBy: {name:'Linh Hyunh', email:'linh.hyunh+worker@scale.com'},
         runId: runId,
+        modelCount: modelNames.length,
+        modelsCompleted: failed ? modelNames.length - 1 : modelNames.length,
+        modelDetails: rlModels.map(function(m) {
+          if (m.status === 'failed') {
+            return { name: m.name, retried: false, runs: [
+              { label: 'Run 1', status: 'Incomplete', duration: elapsed, done: m.done, tasks: m.tasks, runId: randomId() }
+            ]};
+          }
+          return { name: m.name, retried: false, runs: [
+            { label: null, status: 'Completed', duration: elapsed, done: m.done, tasks: m.tasks, runId: randomId() }
+          ]};
+        }),
       });
     }
 
@@ -4445,6 +5057,9 @@ Do not include any other text before or after the JSON object</textarea>
       if (rpcHide) rpcHide.style.display = 'none';
       clearInterval(rlInterval);
       clearInterval(rlElapsedInterval);
+
+      var resOrig = document.getElementById('res-original');
+      if (resOrig) resOrig.style.display = '';
     
       document.getElementById('detailTitle').textContent = rlRunName;
       document.getElementById('detailId').textContent = rlModels[0]?.runId || randomId();
@@ -4490,7 +5105,7 @@ Do not include any other text before or after the JSON object</textarea>
     function simulateScenario(type, variant) {
       document.getElementById('simDropdown').classList.remove('open');
       _runSaved = false;
-      runHistory = [];
+      runHistory = []; rhPage = 1;
       rlVariant = variant || 'A';
 
       const url = 'https://hyperplant.io.naver.com/v1/proxy/call_llm';
@@ -4546,6 +5161,12 @@ Do not include any other text before or after the JSON object</textarea>
       rpcCard2.style.display = 'block';
       rpcCard2.classList.remove('rpc-hiding');
       document.getElementById('rpcJudge').innerHTML = '<i class="fa-solid fa-gear"></i> Judge: ' + judgeName2 + ' \u00B7 ' + activeRunTasks + ' tasks each';
+
+      var resOrig2 = document.getElementById('res-original');
+      if (resOrig2) resOrig2.style.display = 'none';
+      var errorBanner2 = document.getElementById('errorBanner');
+      if (errorBanner2) errorBanner2.style.display = 'none';
+
       renderRunProgressCard();
 
       clearInterval(rlInterval);
@@ -4575,42 +5196,73 @@ Do not include any other text before or after the JSON object</textarea>
     
     function viewRunByIndex(idx) { viewRun(runs[idx]); }
     
+    var rhPage = 1;
+    var rhRowsPerPage = 10;
+    var rhSortField = null;
+    var rhSortAsc = true;
+
     function generateFakeRunHistory(run, models, isFailed, failIdx) {
       var history = [];
-      var statuses = ['Completed', 'Completed', 'Completed', 'Failed', 'Completed', 'Completed'];
-      var judges = ['GPT-5.2', 'GPT-5.2', 'Gemini 3', 'GPT-5.2', 'Claude Opus', 'GPT-5.2'];
-      var durations = ['6m 42s', '5m 18s', '7m 05s', '3m 12s', '8m 30s', '4m 55s'];
+      var statusPool = ['Completed', 'Completed', 'Completed', 'Partially completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed', 'Completed'];
+      var retriedIndices = [1, 5, 8, 14, 22];
+      var durationPool = ['02:33:12', '01:45:08', '03:12:44', '00:58:30', '02:10:55', '01:22:17', '04:05:33', '00:42:19', '03:48:02', '01:15:40'];
+      var runByPool = [
+        {name:'Linh Hyunh', email:'linh.hyunh+worker@scale.com'},
+        {name:'Alex Chen', email:'alex.chen@scale.com'},
+        {name:'Maria Garcia', email:'maria.garcia@scale.com'},
+        {name:'James Wu', email:'james.wu@scale.com'},
+        {name:'Sarah Kim', email:'sarah.kim@scale.com'}
+      ];
       var tasks = run.tasks || 200;
-
+      var totalRuns = 36;
       var now = new Date();
-      for (var i = 0; i < 6; i++) {
+
+      for (var i = 0; i < totalRuns; i++) {
         var d = new Date(now);
-        d.setDate(d.getDate() - i * 7);
+        d.setDate(d.getDate() - i * 2);
+        d.setHours(10 + Math.floor(Math.random() * 12), Math.floor(Math.random() * 60));
         var timeStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
-          d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+          d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) + ' (PST)';
 
-        var status = i === 0 ? (isFailed ? 'Failed' : run.status || 'Completed') : statuses[i];
-        var thisFailIdx = status === 'Failed' ? Math.floor(Math.random() * models.length) : -1;
-        if (i === 0 && isFailed) thisFailIdx = failIdx;
+        var status = i === 0 ? (isFailed ? 'Partially completed' : run.status || 'Completed') : statusPool[i % statusPool.length];
+        var wasRetried = retriedIndices.indexOf(i) !== -1;
+        if (wasRetried && status === 'Partially completed') wasRetried = false;
+        if (wasRetried) status = 'Completed';
 
-        var modelResults = models.map(function(m, mi) {
-          if (status === 'Failed' && mi === thisFailIdx) {
-            var done = Math.floor(tasks * (0.2 + Math.random() * 0.4));
-            return { name: m, status: 'Failed', done: done, tasks: tasks, error: 'Connection timeout', taskId: randomId() };
+        var retriedModelIdx = wasRetried ? (i % models.length) : -1;
+        var partialModelIdx = (status === 'Partially completed') ? (i % models.length) : -1;
+
+        var modelDetails = models.map(function(m, mi) {
+          if (mi === partialModelIdx) {
+            var partialDone = Math.floor(tasks * (0.6 + Math.random() * 0.25));
+            return { name: m, retried: false, runs: [
+              { label: 'Run 1', status: 'Incomplete', duration: durationPool[i % durationPool.length], done: partialDone, tasks: tasks, runId: randomId() }
+            ]};
           }
-          return { name: m, status: 'Completed', done: tasks, tasks: tasks, error: null, taskId: randomId() };
+          if (mi === retriedModelIdx) {
+            var run1Done = Math.floor(tasks * (0.7 + Math.random() * 0.2));
+            var remaining = tasks - run1Done;
+            return { name: m, retried: true, runs: [
+              { label: 'Run 2', status: 'Completed', duration: '00:33:12', done: remaining, tasks: remaining, runId: randomId() },
+              { label: 'Run 1', status: 'Incomplete', duration: durationPool[i % durationPool.length], done: run1Done, tasks: tasks, runId: randomId() }
+            ]};
+          }
+          return { name: m, retried: false, runs: [
+            { label: null, status: 'Completed', duration: durationPool[i % durationPool.length], done: tasks, tasks: tasks, runId: randomId() }
+          ]};
         });
 
         history.push({
           name: run.name,
           time: i === 0 ? (run.created || timeStr) : timeStr,
           status: status,
-          taskCount: tasks.toLocaleString(),
-          duration: durations[i],
-          models: models,
-          judgeName: judges[i],
+          tasksPerModel: tasks,
+          duration: durationPool[i % durationPool.length],
+          runBy: runByPool[i % runByPool.length],
           runId: i === 0 ? (run.id || randomId()) : randomId(),
-          modelResults: modelResults,
+          modelCount: models.length,
+          modelsCompleted: status === 'Partially completed' ? models.length - 1 : models.length,
+          modelDetails: modelDetails,
         });
       }
       return history;
@@ -4637,16 +5289,57 @@ Do not include any other text before or after the JSON object</textarea>
       const isFailed = run.status === 'Failed';
       const failIdx = isFailed ? Math.floor(Math.random() * activeRunModels.length) : -1;
       runHistory = generateFakeRunHistory(run, activeRunModels, isFailed, failIdx);
-    
+      rhPage = 1;
       renderRunHistory();
 
-      if (isFailed) {
-        const failedModel = activeRunModels[failIdx];
-        const doneModels = activeRunModels.filter((_, i) => i !== failIdx);
-        const copy = buildErrorCopy([failedModel], doneModels, activeRunModels.length);
-        document.getElementById('errorTitle').textContent = copy.title;
-        document.getElementById('errorMsg').textContent = copy.msg;
-        document.getElementById('retryFailedLabel').textContent = 'Retry failed models';
+      var errorBanner = document.getElementById('errorBanner');
+      if (errorBanner) errorBanner.style.display = 'none';
+
+      var isRunning = run.status === 'Running';
+      var isCanceled = run.status === 'Canceled';
+
+      if (isFailed || isRunning || isCanceled) {
+        rlModels = activeRunModels.map(function(name, i) {
+          if (isFailed) {
+            var failed = i === failIdx;
+            var doneTasks = failed ? Math.round(activeRunTasks * (0.4 + Math.random() * 0.3)) : activeRunTasks;
+            return {
+              name: name, status: failed ? 'failed' : 'done',
+              done: doneTasks, tasks: activeRunTasks,
+              error: failed ? 'Rate limit exceeded after ' + doneTasks + ' tasks' : null,
+              startTime: new Date()
+            };
+          }
+          if (isCanceled) {
+            var cancelDone = Math.round(activeRunTasks * (0.3 + Math.random() * 0.5));
+            return {
+              name: name, status: 'failed',
+              done: cancelDone, tasks: activeRunTasks,
+              error: 'Canceled by user after ' + cancelDone + ' tasks',
+              startTime: new Date()
+            };
+          }
+          var runDone = Math.round(activeRunTasks * (0.3 + Math.random() * 0.5));
+          return {
+            name: name, status: 'running',
+            done: runDone, tasks: activeRunTasks,
+            error: null, startTime: new Date()
+          };
+        });
+        rlRunName = run.name;
+        rlStartTime = Date.now() - (Math.floor(Math.random() * 120) + 30) * 1000;
+
+        var resOrig = document.getElementById('res-original');
+        if (resOrig) resOrig.style.display = isRunning ? 'none' : '';
+
+        var rpcCard = document.getElementById('runProgressCard');
+        if (rpcCard) { rpcCard.style.display = 'block'; rpcCard.classList.remove('rpc-hiding'); }
+        var judgeName = wizJudgeModel ? (wizJudgeModel.model || 'gemini-3o') : 'gemini-3o';
+        document.getElementById('rpcJudge').innerHTML = '<i class="fa-solid fa-gear"></i> Judge: ' + judgeName;
+        var sec = Math.floor((Date.now() - rlStartTime) / 1000);
+        var rpcEl = document.getElementById('rpcElapsed');
+        if (rpcEl) rpcEl.innerHTML = '<i class="fa-solid fa-stopwatch"></i> ' + sec + 's elapsed';
+        renderRunProgressCard();
       }
 
       setRunState(mappedState);
@@ -4695,10 +5388,9 @@ Do not include any other text before or after the JSON object</textarea>
         document.getElementById('statModels').textContent = activeRunModels.length;
         document.getElementById('resultsShowing').textContent = 'Showing 1-10 of ' + activeRunTasks;
       } else if (state === 'failed') {
-        badge.className = 'badge-status badge-failed';
-        badge.innerHTML = 'Failed';
+        badge.className = 'badge-status badge-warning';
+        badge.innerHTML = 'Partially successful';
         cancel.style.display = 'none';
-        error.style.display = 'flex';
         duration.innerHTML = '<i class="fa-solid fa-stopwatch" style="font-size:11px"></i> Failed after 6m 42s';
         statEta.textContent = 'Failed';
         document.getElementById('statTasks').textContent = Math.round(activeRunTasks * 0.58);
@@ -4718,7 +5410,6 @@ Do not include any other text before or after the JSON object</textarea>
         badge.className = 'badge-status badge-canceled';
         badge.innerHTML = 'Canceled';
         cancel.style.display = 'none';
-        error.style.display = 'flex';
         duration.innerHTML = '<i class="fa-solid fa-stopwatch" style="font-size:11px"></i> Canceled after 6m 42s';
         statEta.textContent = 'Canceled';
         document.getElementById('statTasks').textContent = Math.round(activeRunTasks * 0.58);
@@ -4752,97 +5443,113 @@ Do not include any other text before or after the JSON object</textarea>
       runHistory.unshift(entry);
       renderRunHistory();
     }
-    
+
+    function sortRunHistory(field) {
+      if (rhSortField === field) {
+        rhSortAsc = !rhSortAsc;
+      } else {
+        rhSortField = field;
+        rhSortAsc = true;
+      }
+      rhPage = 1;
+      renderRunHistory();
+    }
+
     function renderRunHistory() {
-      var container = document.getElementById('rhTimeline');
-      if (!container) return;
+      var tbody = document.getElementById('rhTableBody');
+      var footer = document.getElementById('rhTableFooter');
+      if (!tbody) return;
       if (!runHistory || runHistory.length === 0) {
-        container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--tertiary);font-size:13px"><i class="fa-solid fa-clock-rotate-left" style="font-size:20px;display:block;margin-bottom:8px;color:var(--muted-icon)"></i>No run history yet</div>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px 0;color:var(--tertiary);font-size:13px"><i class="fa-solid fa-clock-rotate-left" style="font-size:20px;display:block;margin-bottom:8px;color:var(--muted-icon)"></i>No run history yet</td></tr>';
+        if (footer) footer.innerHTML = '';
         return;
       }
+
+      var sorted = runHistory.slice();
+      if (rhSortField === 'runId') {
+        sorted.sort(function(a, b) {
+          var av = a.runId || '', bv = b.runId || '';
+          return rhSortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+        });
+      }
+
+      var total = sorted.length;
+      var totalPages = Math.ceil(total / rhRowsPerPage);
+      if (rhPage > totalPages) rhPage = totalPages;
+      if (rhPage < 1) rhPage = 1;
+      var start = (rhPage - 1) * rhRowsPerPage;
+      var end = Math.min(start + rhRowsPerPage, total);
+      var pageItems = sorted.slice(start, end);
+
       try {
-      container.innerHTML = runHistory.map((r, i) => {
-        const isCurrent = i === 0;
-        const badgeClass = r.status === 'Completed' ? 'badge-completed' : r.status === 'Failed' ? 'badge-failed' : r.status === 'Canceled' ? 'badge-canceled' : r.status === 'Running' ? 'badge-running' : 'badge-scheduled';
-        const badgeIcon = r.status === 'Completed' ? '<i class="fa-solid fa-check" style="font-size:9px"></i> '
-          : r.status === 'Failed' ? '<i class="fa-solid fa-xmark" style="font-size:9px"></i> '
-          : r.status === 'Canceled' ? '<i class="fa-solid fa-ban" style="font-size:9px"></i> '
-          : '';
+        tbody.innerHTML = pageItems.map(function(r, i) {
+          var globalIdx = start + i;
+          var badgeClass = r.status === 'Completed' ? 'badge-completed' : r.status === 'Partially completed' ? 'badge-warning' : r.status === 'Canceled' ? 'badge-canceled' : r.status === 'Running' ? 'badge-running' : 'badge-scheduled';
+          var rid = r.runId || '—';
 
-        const judgeName = r.judgeName || '—';
-        const runId = r.runId || '—';
+          var mc = r.modelCount || activeRunModels.length || 5;
+          var mDone = r.modelsCompleted != null ? r.modelsCompleted : mc;
 
-        const models = r.modelResults || [];
-        const completedCount = models.filter(m => m.status === 'Completed').length;
-        const failedCount = models.filter(m => m.status !== 'Completed').length;
-        const totalCount = models.length;
+          return '<tr onclick="loadHistoryRun(' + globalIdx + ')">' +
+            '<td><div class="rh-id-cell"><div class="rh-id-cell-text"><a class="rh-id-link" href="javascript:void(0)" onclick="event.stopPropagation();loadHistoryRun(' + globalIdx + ')">' + r.time + '</a><span class="rh-id-sub">' + rid + '</span></div><button class="rh-copy-btn" onclick="event.stopPropagation();copyToClip(\'' + rid + '\')" title="Copy Run ID"><i class="fa-regular fa-copy"></i></button></div></td>' +
+            '<td><span class="badge-status ' + badgeClass + '">' + r.status + '</span></td>' +
+            '<td class="rh-tasks-cell">' + mDone + ' / ' + mc + '</td>' +
+            '<td class="rh-duration-cell">' + (r.duration || '—') + '</td>' +
+            '<td class="rh-tasks-cell">' + (r.tasksPerModel != null ? r.tasksPerModel.toLocaleString() : (r.taskCount || '—')) + '</td>' +
+            '<td class="rh-runby-cell">' + (function() {
+              var rb = r.runBy;
+              if (!rb) return '—';
+              if (typeof rb === 'object') {
+                var initials = rb.name.split(' ').map(function(w){return w[0]}).join('').toUpperCase();
+                return rb.name;
+              }
+              return rb;
+            })() + '</td>' +
+          '</tr>';
+        }).join('');
+      } catch(e) {
+        tbody.innerHTML = '<tr><td colspan="6" style="color:red;font-size:12px;padding:16px">Run history error: ' + e.message + '</td></tr>';
+      }
 
-        let modelsSummaryText = '';
-        let summaryClass = 'rh-models-summary-ok';
-        if (totalCount > 0) {
-          if (failedCount === 0) {
-            modelsSummaryText = `${totalCount} model${totalCount !== 1 ? 's' : ''} — <span class="rh-models-summary-ok">all completed</span>`;
-          } else if (completedCount === 0) {
-            summaryClass = 'rh-models-summary-fail';
-            modelsSummaryText = `${totalCount} model${totalCount !== 1 ? 's' : ''} — <span class="rh-models-summary-fail">all failed</span>`;
-          } else {
-            modelsSummaryText = `${totalCount} model${totalCount !== 1 ? 's' : ''} — <span class="rh-models-summary-ok">${completedCount} completed</span>, <span class="rh-models-summary-warn">${failedCount} failed</span>`;
-          }
+      if (footer) {
+        var pageButtons = '';
+        pageButtons += '<button class="rh-page-btn" ' + (rhPage <= 1 ? 'disabled' : '') + ' onclick="rhGoPage(1)"><i class="fa-solid fa-chevrons-left" style="font-size:10px"></i></button>';
+        pageButtons += '<button class="rh-page-btn" ' + (rhPage <= 1 ? 'disabled' : '') + ' onclick="rhGoPage(' + (rhPage - 1) + ')"><i class="fa-solid fa-chevron-left" style="font-size:10px"></i></button>';
+
+        var startPage = Math.max(1, rhPage - 2);
+        var endPage = Math.min(totalPages, startPage + 5);
+        if (endPage - startPage < 5) startPage = Math.max(1, endPage - 5);
+
+        for (var p = startPage; p <= endPage; p++) {
+          pageButtons += '<button class="rh-page-btn' + (p === rhPage ? ' active' : '') + '" onclick="rhGoPage(' + p + ')">' + p + '</button>';
         }
 
-        const modelsListHtml = models.length > 0 ? models.map(m => {
-          const isOk = m.status === 'Completed';
-          const warnIcon = !isOk ? '<i class="fa-solid fa-triangle-exclamation"></i> ' : '';
-          const taskId = m.taskId || randomId();
-          return `<div class="rh-model-row">
-            <span class="rh-model-name-group">
-              <span class="rh-model-name">${m.name}</span>
-              <button class="rh-copy-id-btn" onclick="event.stopPropagation();copyToClip('${taskId}')" title="Copy Task ID"><i class="fa-regular fa-clone"></i> Task ID</button>
-            </span>
-            <span class="rh-model-count">${warnIcon}${m.done} / ${m.tasks}</span>
-          </div>`;
-        }).join('') : '';
+        if (endPage < totalPages) {
+          pageButtons += '<span style="color:var(--tertiary);font-size:12px;padding:0 2px">...</span>';
+          pageButtons += '<button class="rh-page-btn" onclick="rhGoPage(' + totalPages + ')">' + totalPages + '</button>';
+        }
 
-        const modelsSection = totalCount > 0 ? `
-          <button class="rh-models-toggle" onclick="event.stopPropagation();toggleRhModels(this)">
-            <i class="fa-solid fa-cube" style="font-size:11px;color:var(--tertiary)"></i>
-            ${modelsSummaryText}
-            <i class="fa-solid fa-chevron-down chevron"></i>
-          </button>
-          <div class="rh-models-list">${modelsListHtml}</div>` : '';
+        pageButtons += '<button class="rh-page-btn" ' + (rhPage >= totalPages ? 'disabled' : '') + ' onclick="rhGoPage(' + (rhPage + 1) + ')"><i class="fa-solid fa-chevron-right" style="font-size:10px"></i></button>';
+        pageButtons += '<button class="rh-page-btn" ' + (rhPage >= totalPages ? 'disabled' : '') + ' onclick="rhGoPage(' + totalPages + ')"><i class="fa-solid fa-chevrons-right" style="font-size:10px"></i></button>';
 
-        return `<div class="rh-card${isCurrent ? ' rh-current' : ''}" onclick="loadHistoryRun(${i})">
-          <div class="rh-card-header">
-            <div class="rh-card-header-left">
-              <span class="rh-card-timestamp">${r.time}</span>
-              <button class="rh-copy-id-btn" onclick="event.stopPropagation();copyToClip('${runId}')" title="Copy Run ID">
-                <i class="fa-regular fa-clone"></i> Run ID
-              </button>
-            </div>
-            <span class="badge-status ${badgeClass}">${badgeIcon}${r.status}</span>
-          </div>
-          <div class="rh-card-separator"></div>
-          <div class="rh-card-body">
-            <div class="rh-card-meta">
-              <span><i class="fa-regular fa-clock" style="font-size:11px"></i> ${r.duration || '—'}</span>
-              <span class="rh-meta-separator"></span>
-              <span><i class="fa-solid fa-gear" style="font-size:11px"></i> ${judgeName}</span>
-              <span class="rh-meta-separator"></span>
-              <span><i class="fa-solid fa-list-check" style="font-size:11px"></i> ${r.taskCount || '—'} tasks each</span>
-            </div>
-            ${modelsSection}
-          </div>
-        </div>`;
-      }).join('');
-      } catch(e) {
-        container.innerHTML = '<div style="color:red;font-size:12px;padding:16px">Run history error: ' + e.message + '</div>';
+        footer.innerHTML =
+          '<div class="rh-pagination">' + pageButtons + '</div>' +
+          '<div class="rh-footer-right">' +
+            '<select class="rh-rows-select" onchange="rhChangeRows(this.value)"><option' + (rhRowsPerPage === 10 ? ' selected' : '') + '>10 rows per page</option><option' + (rhRowsPerPage === 25 ? ' selected' : '') + '>25 rows per page</option><option' + (rhRowsPerPage === 50 ? ' selected' : '') + '>50 rows per page</option></select>' +
+            '<span>Showing ' + (start + 1) + '-' + end + ' of ' + total + '</span>' +
+          '</div>';
       }
     }
 
-    function toggleRhModels(btn) {
-      btn.classList.toggle('open');
-      const list = btn.nextElementSibling;
-      if (list) list.classList.toggle('open');
+    function rhGoPage(p) {
+      rhPage = p;
+      renderRunHistory();
+    }
+
+    function rhChangeRows(val) {
+      rhRowsPerPage = parseInt(val) || 10;
+      rhPage = 1;
+      renderRunHistory();
     }
 
     function copyToClip(text) {
@@ -4856,12 +5563,105 @@ Do not include any other text before or after the JSON object</textarea>
       });
     }
     
+    var rdCurrentIdx = -1;
+
+    var drawerModelPool = [
+      'Gemini-3-pro-view',
+      'qwen3-8b',
+      'qwen.qwen3-coder-30b-a3b-v1:0',
+      'Gemini-2.5-flash',
+      'afm-model-094'
+    ];
+
     function loadHistoryRun(idx) {
-      const r = runHistory[idx];
+      var r = runHistory[idx];
       if (!r) return;
-      document.getElementById('detailTitle').textContent = r.name || 'Run';
-      const tabs = document.querySelectorAll('#page-detail .detail-tab');
-      switchDetailTab('dp-results', tabs[0]);
+      rdCurrentIdx = idx;
+      openRunDetailsDrawer(r);
+    }
+
+    function openRunDetailsDrawer(r) {
+      var overlay = document.getElementById('rdOverlay');
+      var dataList = document.getElementById('rdDataList');
+      var tbody = document.getElementById('rdModelBody');
+      var footer = document.getElementById('rdModelFooter');
+
+      var runDate = r.time || '—';
+      var rid = r.runId || '—';
+
+      dataList.innerHTML =
+        '<div class="rd-data-row"><span class="rd-data-label">Run date</span><span class="rd-data-value">' + runDate + '</span></div>' +
+        '<div class="rd-data-row"><span class="rd-data-label">Run ID</span><span class="rd-data-value" style="font-family:monospace">' + rid + '</span></div>';
+
+      var modelNames = (activeRunModels && activeRunModels.length > 0) ? activeRunModels : drawerModelPool;
+      var tasks = r.tasksPerModel || activeRunTasks || 200;
+      var duration = r.duration || '02:33:12';
+      var details = r.modelDetails || null;
+
+      var rowsHtml = '';
+      var totalDisplayRows = 0;
+      modelNames.forEach(function(m, i) {
+        var md = details ? details[i] : null;
+        var modelId = rid;
+
+        var runs;
+        if (md && md.runs) {
+          runs = md.runs;
+        } else {
+          runs = [{ label: null, status: 'Completed', duration: duration, done: tasks, tasks: tasks }];
+        }
+
+        if (runs.length === 1) {
+          var run = runs[0];
+          var badgeClass = run.status === 'Completed' ? 'badge-completed' : 'badge-warning';
+          var statusLabel = run.status === 'Completed' ? 'Completed' : 'Incomplete';
+          var singleRunId = run.runId || modelId;
+          rowsHtml += '<tr>' +
+            '<td><div class="rd-model-cell"><div class="rd-model-cell-text"><span class="rd-model-name">' + m + '</span><span class="rd-model-id">' + singleRunId + '</span></div><button class="rd-model-copy-btn" onclick="event.stopPropagation();copyToClip(\'' + singleRunId + '\')" title="Copy ID"><i class="fa-regular fa-copy"></i></button></div></td>' +
+            '<td><span class="badge-status ' + badgeClass + '">' + statusLabel + '</span></td>' +
+            '<td class="rd-duration-cell">' + (run.duration || duration) + '</td>' +
+            '<td class="rd-tasks-cell">' + run.done + ' / ' + run.tasks + '</td>' +
+            '<td><div class="rd-obs-cell"><a class="rd-obs-link" href="javascript:void(0)">Temporal <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="rd-obs-link" href="javascript:void(0)">Datadog <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></td>' +
+          '</tr>';
+          totalDisplayRows++;
+        } else {
+          runs.forEach(function(run, ri) {
+            var badgeClass = run.status === 'Completed' ? 'badge-completed' : 'badge-warning';
+            var statusLabel = run.status === 'Completed' ? 'Completed' : 'Incomplete';
+            var runBadge = run.label ? '<span class="rd-run-label">' + run.label + '</span>' : '';
+            var perRunId = run.runId || modelId;
+            var isLastInGroup = ri === runs.length - 1;
+
+            rowsHtml += '<tr' + (isLastInGroup ? '' : ' class="rd-no-border"') + '>' +
+              '<td><div class="rd-model-cell"><div class="rd-model-cell-text"><span class="rd-model-name">' + m + runBadge + '</span><span class="rd-model-id">' + perRunId + '</span></div><button class="rd-model-copy-btn" onclick="event.stopPropagation();copyToClip(\'' + perRunId + '\')" title="Copy ID"><i class="fa-regular fa-copy"></i></button></div></td>' +
+              '<td><span class="badge-status ' + badgeClass + '">' + statusLabel + '</span></td>' +
+              '<td class="rd-duration-cell">' + (run.duration || duration) + '</td>' +
+              '<td class="rd-tasks-cell">' + run.done + ' / ' + run.tasks + '</td>' +
+              '<td><div class="rd-obs-cell"><a class="rd-obs-link" href="javascript:void(0)">Temporal <i class="fa-solid fa-arrow-up-right-from-square"></i></a><a class="rd-obs-link" href="javascript:void(0)">Datadog <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></td>' +
+            '</tr>';
+            totalDisplayRows++;
+          });
+        }
+      });
+
+      tbody.innerHTML = rowsHtml;
+
+      footer.innerHTML =
+        '<div style="font-size:12px;color:var(--secondary)">Showing 1-' + modelNames.length + ' of ' + modelNames.length + '</div>';
+
+      overlay.classList.add('open');
+    }
+
+    function closeRunDetailsDrawer() {
+      document.getElementById('rdOverlay').classList.remove('open');
+      rdCurrentIdx = -1;
+    }
+
+    function navRunDetail(dir) {
+      var newIdx = rdCurrentIdx + dir;
+      if (newIdx < 0 || newIdx >= runHistory.length) return;
+      rdCurrentIdx = newIdx;
+      openRunDetailsDrawer(runHistory[newIdx]);
     }
     
     // ═══ Sticky retry banner ═══
@@ -4926,14 +5726,29 @@ Do not include any other text before or after the JSON object</textarea>
           renderAllResults();
           setRunState('completed');
           addRunHistoryEntry({
-            time: new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }),
+            time: new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }) + ' (PST)',
             status: 'Completed',
-            taskCount: retryModels.reduce((s, m) => s + m.tasks, 0).toLocaleString(),
-            duration: '2m 10s',
-            models: retryModels.map(m => m.name),
-            modelResults: retryModels.map(m => ({ name: m.name, status: 'Completed', done: m.tasks, tasks: m.tasks, error: null, taskId: randomId() })),
-            judgeName: wizJudgeModel ? (wizJudgeModel.model || wizJudgeModel.strategy) : 'GPT-5.2',
+            tasksPerModel: retryModels.reduce((s, m) => s + m.tasks, 0),
+            duration: '00:02:10',
+            runBy: {name:'Linh Hyunh', email:'linh.hyunh+worker@scale.com'},
             runId: randomId(),
+            modelCount: activeRunModels.length,
+            modelsCompleted: activeRunModels.length,
+            modelDetails: activeRunModels.map(function(name) {
+              var rm = retryModels.find(function(r) { return r.name === name; });
+              if (rm) {
+                var remaining = rm.tasks;
+                var prevEntry = runHistory.length > 0 ? runHistory[0] : null;
+                var prevDone = activeRunTasks - remaining;
+                return { name: name, retried: true, runs: [
+                  { label: 'Run 2', status: 'Completed', duration: '00:02:10', done: remaining, tasks: remaining, runId: randomId() },
+                  { label: 'Run 1', status: 'Incomplete', duration: prevEntry ? prevEntry.duration : '—', done: prevDone, tasks: activeRunTasks, runId: randomId() }
+                ]};
+              }
+              return { name: name, retried: false, runs: [
+                { label: null, status: 'Completed', duration: '00:02:10', done: activeRunTasks, tasks: activeRunTasks, runId: randomId() }
+              ]};
+            }),
           });
         }, 1500);
       }
@@ -5195,13 +6010,15 @@ Do not include any other text before or after the JSON object</textarea>
       resultModels = activeRunModels.map((m, i) => {
         const mand = 40 + Math.random() * 35;
         const all = mand * (0.65 + Math.random() * 0.2);
+        const rlm = rlModels && rlModels[i];
+        const doneTasks = (rlm && typeof rlm.done === 'number') ? rlm.done : activeRunTasks;
         return {
           name: m,
           mand,
           all,
           pass1Mand: mand * (0.55 + Math.random() * 0.12),
           pass1All: all * (0.5 + Math.random() * 0.15),
-          tasks: activeRunTasks,
+          tasks: doneTasks,
           color: modelColors[i] || '#3B82F6',
         };
       });
@@ -5332,7 +6149,7 @@ Do not include any other text before or after the JSON object</textarea>
       const sc = document.getElementById('detailStatCards');
       if (sc) {
         sc.innerHTML = `
-          <div class="ssc"><div class="ssc-label">Tasks evaluated</div><div class="ssc-value">${m.tasks} <span style="font-size:12px;font-weight:400;color:var(--tertiary)">/${activeRunTasks}</span></div><div class="ssc-sub">100%</div></div>
+          <div class="ssc"><div class="ssc-label">Tasks evaluated</div><div class="ssc-value">${m.tasks} <span style="font-size:12px;font-weight:400;color:var(--tertiary)">/${activeRunTasks}</span></div><div class="ssc-sub">${Math.round(m.tasks / activeRunTasks * 100)}%</div></div>
           <div class="ssc"><div class="ssc-label">Mandatory pass@${K_RUNS} <svg class="ssc-info-icon" viewBox="0 0 512 512" fill="var(--tertiary)"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm-40-176h24v-64h-24a16 16 0 0 1 0-32h40a16 16 0 0 1 16 16v80h8a16 16 0 0 1 0 32h-64a16 16 0 0 1 0-32zm40-144a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/></svg></div><div class="ssc-value">${m.mand.toFixed(2)}%</div></div>
           <div class="ssc"><div class="ssc-label">All-criteria pass@${K_RUNS} <svg class="ssc-info-icon" viewBox="0 0 512 512" fill="var(--tertiary)"><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm-40-176h24v-64h-24a16 16 0 0 1 0-32h40a16 16 0 0 1 16 16v80h8a16 16 0 0 1 0 32h-64a16 16 0 0 1 0-32zm40-144a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/></svg></div><div class="ssc-value">${m.all.toFixed(2)}%</div></div>`;
       }
@@ -6085,7 +6902,7 @@ Do not include any other text before or after the JSON object</textarea>
       kValue:5
     };
     
-    const endpointCatalog = [
+    const customerModelCatalog = [
       { name:'gemini-3.1-pro-preview', params:'max_tokens: 64k | temperature: 0', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', json:'{ "root": { ... } }' },
       { name:'gemini-3.1-pro-preview', params:'temperature: 0 | max_tokens: 64k', url:'https://litellm.ml-serving-internal.scale.com/v1/chat/completions', json:'{ "root": { ... } }' },
       { name:'gemini-3.1-pro-preview', params:'max_tokens: 64k | temperature: 1', url:'https://litellm.ml-serving-internal.scale.com/v1/chat/completions', json:'{ "root": { ... } }' },
@@ -6093,6 +6910,22 @@ Do not include any other text before or after the JSON object</textarea>
       { name:'gpt-4o', params:'max_tokens: 16k | temperature: 0.7', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', json:'{ "root": { ... } }' },
       { name:'claude-3.5-sonnet', params:'max_tokens: 8k | temperature: 0', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', json:'{ "root": { ... } }' },
     ];
+
+    const customEndpointCatalog = [
+      { name:'AirdaleStrategy', url:'https://api.ai21.com/studio/v1/j2-ultra/complete', tag:'Airdale' },
+      { name:'AiredaleChatStrategy', url:'https://api.ai21.com/studio/v1/j2-ultra/chat', tag:'Airdale' },
+      { name:'AlpacaStrategy', url:'https://q3pacei43h.execute-api.us-east-1.amazonaws.com', tag:'Alpaca' },
+      { name:'AlpacaStrategyV2', url:'wss://z5s66g8104.execute-api.us-east-1.amazonaws.com/prod/', tag:'Alpaca', note:'Connect to models via websockets' },
+      { name:'AnthropicStrategy', url:'https://api.anthropic.com/v1/messages', tag:'Abra' },
+      { name:'BeaverStrategy', url:'https://hyperplant.io.naver.com/v1/proxy/call_llm', tag:'Beaver' },
+      { name:'BeeBenchmarkStrategy', url:'https://usw2-fm-third-party-endpoint-prod.apple.com/fm-benchmarking/api/v1/chat/completions', tag:'Bee', note:'Only for afm-text-benchmark-scale-* endpoints' },
+      { name:'GoogleStrategy', url:'https://generativelanguage.googleapis.com/v1beta/models', tag:'Google' },
+      { name:'LiteLLMStrategy', url:'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions', tag:'LiteLLM' },
+      { name:'OpenAIStrategy', url:'https://api.openai.com/v1/chat/completions', tag:'OpenAI' },
+    ];
+
+    let activeEpTab = 0;
+    const endpointCatalog = customerModelCatalog;
     
     let endpointModalTarget = 'solver';
     
@@ -6256,9 +7089,6 @@ Do not include any other text before or after the JSON object</textarea>
               <div class="wiz-mc-field"><label>Temperature</label><input type="number" value="0" step="0.1"></div>
             </div>
           </div>
-          <div class="wiz-mc-kv-row" style="margin-top:8px">
-            <div class="wiz-mc-field"><label>K-value</label><input type="number" value="${m.kValue}"></div>
-          </div>
         </div>`;
     }
     
@@ -6274,11 +7104,37 @@ Do not include any other text before or after the JSON object</textarea>
       wizSolverModels.splice(idx, 1);
       renderWizSolverCards();
     }
+
+    function addPresetSolver(provider, model, k) {
+      syncSolverCardsFromDOM();
+      var filled = wizSolverModels.length === 1 && !wizSolverModels[0].model && !wizSolverModels[0].provider;
+      if (filled) {
+        wizSolverModels[0].provider = provider;
+        wizSolverModels[0].model = model;
+        wizSolverModels[0].kValue = k;
+      } else {
+        wizSolverModels.push({
+          strategy: 'LiteLLMStrategy',
+          url: 'https://litellm-proxy.ml-serving-internal.scale.com/v1/chat/completions',
+          provider: provider,
+          model: model,
+          kValue: k,
+          advOpen: false,
+          timeout: 3,
+          maxTokens: 3,
+          temperature: 0
+        });
+      }
+      renderWizSolverCards();
+    }
     
     function openEndpointModal(target) {
       endpointModalTarget = target;
+      activeEpTab = 0;
       document.getElementById('endpointModal').classList.add('open');
       document.getElementById('endpointSearchInput').value = '';
+      var tabs = document.querySelectorAll('.wiz-ep-tab');
+      tabs.forEach(function(t, i) { t.classList.toggle('active', i === 0); });
       renderEndpointList();
     }
     function closeEndpointModal() {
@@ -6288,18 +7144,36 @@ Do not include any other text before or after the JSON object</textarea>
     function renderEndpointList() {
       const q = (document.getElementById('endpointSearchInput')?.value || '').toLowerCase();
       const list = document.getElementById('endpointList');
-      const filtered = q ? endpointCatalog.filter(e => e.name.toLowerCase().includes(q) || e.url.toLowerCase().includes(q)) : endpointCatalog;
-      list.innerHTML = filtered.map((ep, i) => `
-        <div class="wiz-ep-item">
-          <div class="wiz-ep-item-title">${ep.name} <span style="font-weight:400;color:var(--tertiary)">| ${ep.params}</span></div>
-          <div class="wiz-ep-item-url">${ep.url}</div>
-          <button class="wiz-ep-params-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('i').style.transform=this.nextElementSibling.classList.contains('open')?'rotate(180deg)':''">
-            Endpoint Parameters: <i class="fa-solid fa-chevron-down" style="font-size:9px;transition:transform 0.2s"></i>
-          </button>
-          <div class="wiz-ep-params">"root" : ${ep.json}</div>
-          <button class="wiz-ep-add-btn" onclick="addEndpointFromCatalog(${i})"><i class="fa-solid fa-plus" style="font-size:10px"></i> Add Model Version</button>
-        </div>
-      `).join('');
+      const subtitle = document.getElementById('endpointModalSubtitle');
+
+      if (activeEpTab === 0) {
+        if (subtitle) subtitle.innerHTML = 'Need to add a new endpoint? Reach out to <strong>#genai-chat-task-eng</strong>';
+        const filtered = q ? customerModelCatalog.filter(e => e.name.toLowerCase().includes(q) || e.url.toLowerCase().includes(q)) : customerModelCatalog;
+        list.innerHTML = filtered.map((ep, i) => `
+          <div class="wiz-ep-item">
+            <div class="wiz-ep-item-title">${ep.name} <span style="font-weight:400;color:var(--tertiary)">| ${ep.params}</span></div>
+            <div class="wiz-ep-item-url">${ep.url}</div>
+            <button class="wiz-ep-params-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('i').style.transform=this.nextElementSibling.classList.contains('open')?'rotate(180deg)':''">
+              Endpoint Parameters: <i class="fa-solid fa-chevron-down" style="font-size:9px;transition:transform 0.2s"></i>
+            </button>
+            <div class="wiz-ep-params">"root" : ${ep.json}</div>
+            <button class="wiz-ep-add-btn" onclick="addEndpointFromCatalog(${i})"><i class="fa-solid fa-plus" style="font-size:10px"></i> Add Model Version</button>
+          </div>
+        `).join('');
+      } else {
+        if (subtitle) subtitle.innerHTML = 'Have questions about adding a new endpoint? Reach out to <strong>@connectivity-oncall</strong> for help.';
+        const filtered = q ? customEndpointCatalog.filter(e => e.name.toLowerCase().includes(q) || e.url.toLowerCase().includes(q) || (e.tag||'').toLowerCase().includes(q)) : customEndpointCatalog;
+        list.innerHTML = filtered.map((ep, i) => `
+          <div class="wiz-ep-item" style="cursor:pointer" onclick="addCustomEndpoint(${i})">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div class="wiz-ep-item-title">${ep.name}</div>
+              <span style="display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:500;color:var(--accent);background:var(--accent-bg,#EEF2FF);padding:2px 8px;border-radius:9999px"><i class="fa-solid fa-tag" style="font-size:9px"></i> ${ep.tag}</span>
+            </div>
+            <div class="wiz-ep-item-url">${ep.url}</div>
+            ${ep.note ? '<div style="font-size:13px;color:var(--primary);margin-top:4px">' + ep.note + '</div>' : ''}
+          </div>
+        `).join('');
+      }
     }
     
     function filterEndpoints() { renderEndpointList(); }
@@ -6307,6 +7181,28 @@ Do not include any other text before or after the JSON object</textarea>
     function switchEpTab(el, idx) {
       el.parentElement.querySelectorAll('.wiz-ep-tab').forEach(t => t.classList.remove('active'));
       el.classList.add('active');
+      activeEpTab = idx;
+      renderEndpointList();
+    }
+
+    function addCustomEndpoint(idx) {
+      const ep = customEndpointCatalog[idx];
+      if (endpointModalTarget === 'solver') {
+        syncSolverCardsFromDOM();
+        wizSolverModels.push({
+          strategy: ep.name,
+          url: ep.url,
+          provider: '',
+          model: '',
+          kValue: 5,
+          advOpen: false,
+          timeout: 3,
+          maxTokens: 3,
+          temperature: 3
+        });
+        renderWizSolverCards();
+      }
+      closeEndpointModal();
     }
     
     function addEndpointFromCatalog(idx) {
@@ -6316,8 +7212,8 @@ Do not include any other text before or after the JSON object</textarea>
         wizSolverModels.push({
           strategy: ep.name.includes('gemini') ? 'LiteLLMStrategy' : 'BeaverStrategy',
           url: ep.url,
-          provider: '',
-          model: '',
+          provider: ep.provider || '',
+          model: ep.model || '',
           kValue: 5,
           advOpen: false,
           timeout: 3,
@@ -6349,8 +7245,8 @@ Do not include any other text before or after the JSON object</textarea>
       const totalCost = taskCount * solverCount * 0.30;
       const costStr = '$' + totalCost.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0});
       const cols = ['task_id','Prompt','rubrics','Topics'];
-      const solvers = wizSolverModels.map(m => ({name: m.model || m.strategy, k: m.kValue, url: m.url}));
-      if (!solvers.length) solvers.push({name:'LiteLLMStrategy', k:3, url:''});
+      const solvers = wizSolverModels.map(m => ({name: m.model || 'No model selected', k: m.kValue, url: m.url}));
+      if (!solvers.length) solvers.push({name:'No model selected', k:3, url:''});
       const judge = {name: wizJudgeModel.model || wizJudgeModel.strategy || 'o3-mini', k: wizJudgeModel.kValue || 5, url: wizJudgeModel.url || ''};
       const modelCount = solvers.length + 1;
       return {runName, mode, type, taskCount, solverCount, totalCost, costStr, cols, solvers, judge, modelCount};
@@ -6362,7 +7258,7 @@ Do not include any other text before or after the JSON object</textarea>
         const i = idx++;
         return `<div class="sum-a-model-row"><span class="sum-a-model-role">Solver</span><span class="sum-a-model-name">${s.name}</span><span class="sum-a-model-k">K=${s.k}</span><span class="sum-ep-status idle" id="sumEpSt${i}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
       }).join('');
-      const judgeRow = `<div class="sum-a-model-row"><span class="sum-a-model-role">Judge</span><span class="sum-a-model-name">${d.judge.name}</span><span class="sum-a-model-k">K=${d.judge.k}</span><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
+      const judgeRow = `<div class="sum-a-model-row"><span class="sum-a-model-role">Judge</span><span class="sum-a-model-name">${d.judge.name}</span><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
       const colPills = d.cols.map(c => `<span class="sum-col-pill">${c}</span>`).join('');
 
       return `<div class="sum-a">
@@ -6396,7 +7292,7 @@ Do not include any other text before or after the JSON object</textarea>
         const i = idx++;
         return `<div class="sum-b-model-row"><span class="sum-b-model-role solver">Solver</span><span class="sum-b-model-name">${s.name}</span><span class="sum-b-model-k">K=${s.k}</span><span class="sum-ep-status idle" id="sumEpSt${i}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
       }).join('');
-      const judgeRow = `<div class="sum-b-model-row"><span class="sum-b-model-role judge">Judge</span><span class="sum-b-model-name">${d.judge.name}</span><span class="sum-b-model-k">K=${d.judge.k}</span><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
+      const judgeRow = `<div class="sum-b-model-row"><span class="sum-b-model-role judge">Judge</span><span class="sum-b-model-name">${d.judge.name}</span><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div>`;
       const colPills = d.cols.map(c => `<span class="sum-col-pill">${c}</span>`).join('');
 
       return `<div class="sum-b">
@@ -6432,7 +7328,7 @@ Do not include any other text before or after the JSON object</textarea>
         const i = idx++;
         return `<div class="sum-c-model-row"><span class="sum-c-model-name">${s.name}</span><span class="sum-c-model-k">K=${s.k}</span><div class="sum-c-model-status"><span class="sum-ep-status idle" id="sumEpSt${i}"><i class="fa-solid fa-minus"></i> Not tested</span></div></div>`;
       }).join('');
-      const judgeRow = `<div class="sum-c-model-row"><span class="sum-c-model-name">${d.judge.name}</span><span class="sum-c-model-k">K=${d.judge.k}</span><div class="sum-c-model-status"><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div></div>`;
+      const judgeRow = `<div class="sum-c-model-row"><span class="sum-c-model-name">${d.judge.name}</span><div class="sum-c-model-status"><span class="sum-ep-status idle" id="sumEpSt${idx}"><i class="fa-solid fa-minus"></i> Not tested</span></div></div>`;
       const colPills = d.cols.map(c => `<span class="sum-col-pill">${c}</span>`).join('');
 
       return `<div class="sum-c">
@@ -6628,6 +7524,37 @@ Do not include any other text before or after the JSON object</textarea>
     })();
     </script>
     
+    <div class="rd-overlay" id="rdOverlay" onclick="closeRunDetailsDrawer()">
+      <div class="rd-drawer" onclick="event.stopPropagation()">
+        <div class="rd-toolbar">
+          <button class="rd-toolbar-btn" onclick="closeRunDetailsDrawer()" title="Close"><i class="fa-solid fa-xmark"></i></button>
+          <div class="rd-toolbar-divider"></div>
+          <button class="rd-toolbar-btn" onclick="navRunDetail(-1)" title="Previous run"><i class="fa-solid fa-chevron-up"></i></button>
+          <button class="rd-toolbar-btn" onclick="navRunDetail(1)" title="Next run"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+        <div class="rd-body">
+          <div class="rd-title">Run details</div>
+          <div class="rd-data-list" id="rdDataList"></div>
+          <div class="rd-divider"></div>
+          <div class="rd-model-table-wrap">
+            <table class="rd-model-table">
+              <thead>
+                <tr>
+                  <th class="sortable">Model <i class="fa-solid fa-arrow-up-arrow-down sort-icon"></i></th>
+                  <th>Status</th>
+                  <th>Duration</th>
+                  <th>Tasks</th>
+                  <th>Observability</th>
+                </tr>
+              </thead>
+              <tbody id="rdModelBody"></tbody>
+            </table>
+            <div class="rd-table-footer" id="rdModelFooter"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="rubric-overlay" id="rubricOverlay" onclick="closeRubricDrawer()">
       <div class="rubric-drawer" onclick="event.stopPropagation()">
         <div class="rubric-drawer-toolbar">
@@ -6649,7 +7576,24 @@ Do not include any other text before or after the JSON object</textarea>
         </div>
       </div>
     </div>
-    
-    
-    
+
+
+    <div class="ttd-overlay" id="ttdOverlay" onclick="closeTestTaskDrawer()">
+      <div class="ttd-drawer" onclick="event.stopPropagation()">
+        <div class="ttd-toolbar">
+          <button class="ttd-toolbar-btn" onclick="closeTestTaskDrawer()" title="Close"><i class="fa-solid fa-xmark"></i></button>
+          <div class="ttd-toolbar-divider"></div>
+          <button class="ttd-toolbar-btn" onclick="navTestTask(-1)" title="Previous task"><i class="fa-solid fa-chevron-up"></i></button>
+          <button class="ttd-toolbar-btn" onclick="navTestTask(1)" title="Next task"><i class="fa-solid fa-chevron-down"></i></button>
+        </div>
+        <div class="ttd-body">
+          <div class="ttd-title" id="ttdTitle">Task 1</div>
+          <div class="ttd-data-list" id="ttdDataList"></div>
+          <div class="ttd-divider"></div>
+          <div class="ttd-tabs" id="ttdTabs"></div>
+          <div id="ttdTabContent"></div>
+        </div>
+      </div>
+    </div>
+
     </body></html>
